@@ -1,0 +1,8 @@
+// Define an pink-blue-grey theme.
+$pink-blue-grey-primary: mat-palette($mat-pink);
+$pink-blue-grey-accent:  mat-palette($mat-blue-grey, A200, A100, A400);
+$pink-blue-grey-theme:   mat-dark-theme($pink-blue-grey-primary, $pink-blue-grey-accent);
+// Include the alternative theme styles inside of a block with a CSS class. 
+.pink-blue-grey-theme {
+  @include angular-material-theme($pink-blue-grey-theme);
+}

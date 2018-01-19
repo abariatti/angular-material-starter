@@ -1,0 +1,8 @@
+// Define an deep purple amber theme.
+$deep-purple-amber-primary: mat-palette($mat-deep-purple);
+$deep-purple-amber-accent:  mat-palette($mat-amber, A200, A100, A400);
+$deep-purple-amber-theme:   mat-light-theme($deep-purple-amber-primary, $deep-purple-amber-accent);
+// Include the alternative theme styles inside of a block with a CSS class. 
+.deep-purple-amber-theme {
+  @include angular-material-theme($deep-purple-amber-theme);
+}

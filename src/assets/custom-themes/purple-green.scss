@@ -1,0 +1,8 @@
+// Define an pink-blue-grey theme.
+$purple-green-primary: mat-palette($mat-purple);
+$purple-green-accent:  mat-palette($mat-green, A200, A100, A400);
+$purple-green-theme:   mat-dark-theme($purple-green-primary, $purple-green-accent);
+// Include the alternative theme styles inside of a block with a CSS class. 
+.purple-green-theme {
+  @include angular-material-theme($purple-green-theme);
+}
