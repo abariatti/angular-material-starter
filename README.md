@@ -11,6 +11,7 @@ This is a starter template for angular with angular material as design component
 
 ## Features
 
+- Progressive Web App with angular service worker
 - SPA Application Template
 - Header with menu / theme change / profile
 - Collapsible side menu for navigation
