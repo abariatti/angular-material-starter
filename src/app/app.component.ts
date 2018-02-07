@@ -2,6 +2,7 @@ import { Component, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ThemePickerModule } from './shared/theme-picker';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,13 @@ import { OverlayContainer } from '@angular/cdk/overlay';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Angular Material Starter';
-
   constructor(
+    private _translate: TranslateService,
     private _element: ElementRef,
     private _overlayContainer: OverlayContainer
-  ) {}
+  ) {        
+    _translate.setDefaultLang('en');
+  }
   
   onSetStyle(event){
     this._element.nativeElement.className = "";

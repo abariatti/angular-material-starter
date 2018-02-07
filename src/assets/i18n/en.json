@@ -1,0 +1,9 @@
+{
+    "TITLE": "Angular Material Starter Template",
+    "PAGES": {
+        "HOME": {
+            "MENU": "Home",
+            "CONTENT": "Home works!"
+        }
+    }
+}
