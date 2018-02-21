@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ThemePickerModule } from './shared/theme-picker';
 import { OverlayContainer } from '@angular/cdk/overlay';
@@ -9,13 +9,17 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   constructor(
     private _translate: TranslateService,
     private _element: ElementRef,
     private _overlayContainer: OverlayContainer
   ) {        
     _translate.setDefaultLang('en');
+  }
+
+  ngOnInit(){
+  
   }
   
   onSetStyle(event){

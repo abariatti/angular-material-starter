@@ -21,7 +21,7 @@ export class ThemePicker {
   currentTheme;
   defaultTheme;
 
-  themes:[DocsSiteTheme] = [
+  themes:DocsSiteTheme[] = [
     {
       primary: '#673AB7',
       accent: '#FFC107',
@@ -59,7 +59,6 @@ export class ThemePicker {
   }
 
   installTheme(theme: DocsSiteTheme) {
-    console.log(theme);
     this.currentTheme = this._getCurrentThemeFromClass(theme.class);
     this.setStyle.emit(theme.class);
     if (this.currentTheme) {

@@ -1,0 +1,12 @@
+{
+    "short_name": "angular-material-starter",
+    "name": "Angular Material Starter PWA",
+    "start_url": "/",
+
+    "external": {         
+        "urls": [               
+                {"url": "http://fonts.googleapis.com/icon?family=Material+Icons"}
+        ]     
+   }
+
+}
