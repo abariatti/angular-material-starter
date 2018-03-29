@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   registerModel: any = {};
   loading = false;
   returnUrl: string;
-  selectedIndex: Number = 1;
+  selectedIndex: Number = 0;
 
   constructor(
     private route: ActivatedRoute,

@@ -10,7 +10,6 @@ This is a starter template for angular with angular material as design component
 - angular flex-layout
 
 ## Features
-
 - Progressive Web App with angular service worker
 - SPA Application Template
 - Header with menu / theme change / profile
@@ -18,6 +17,7 @@ This is a starter template for angular with angular material as design component
 - Routing module organized with pages
 - Angular Material theming with live theme change
 - Highly responsive with flex-layout
+- User authentication and registration with fake API
 
 ## Angular CLI
 
