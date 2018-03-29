@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
   deleteUser(user: User) {
       const index = this.users.indexOf(user);
       this.users.splice(index, 1);
-      console.log(user);
       try {
         this.userService.delete(user.id).subscribe(
           success => {  },

@@ -48,7 +48,6 @@ export class FakeUserBackendInterceptor implements HttpInterceptor {
 
       // get users
       if (request.url.endsWith('/api/users') && request.method === 'GET') {
-        console.log('get');
         // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           return Observable.of(new HttpResponse({ status: 200, body: users }));
@@ -97,7 +96,6 @@ export class FakeUserBackendInterceptor implements HttpInterceptor {
 
       // delete user
       if (request.url.match(/\/api\/users\/\d+$/) && request.method === 'DELETE') {
-        console.log('delete');
         // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           // find user by id in users array
