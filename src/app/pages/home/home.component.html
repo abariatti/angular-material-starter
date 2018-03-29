@@ -1,3 +1,39 @@
-<p>
-  {{ 'PAGES.HOME.CONTENT' | translate }}
-</p>
+<div fxLayoutGap="14px" fxLayout="row" fxLayout.xs="column">
+  <mat-card>
+    <mat-card-content>
+      <div *ngIf="currentUser">
+        <h1>Hi {{currentUser.name}}!</h1>
+        <p>You're logged in with Angular 2!!</p>
+        <p>
+          <a [routerLink]="['/login']">Logout</a>
+        </p>
+
+      </div>
+      <div *ngIf="!currentUser">
+        <h1>Hi Unknown visitor</h1>
+        <p>
+          <a [routerLink]="['/login']">Login / Register</a>
+        </p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="currentUser">
+    <mat-card-content>
+      <h3>All registered users:</h3>
+      <mat-list>
+        <mat-list-item *ngFor="let user of users">
+            <h3 mat-line> {{user.name}} </h3>
+            <p mat-line>
+              <span> {{user.email}} </span>
+            </p>
+
+            <button mat-icon-button (click)="deleteUser(user)">
+              <mat-icon>delete</mat-icon>
+            </button>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+
+</div>

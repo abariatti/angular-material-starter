@@ -1,3 +1,5 @@
+import { LoginComponent } from './pages/login/login.component';
+import { fakeBackendProvider } from './helpers/fake-backend.provider';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -14,7 +16,12 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AboutComponent } from './pages/about/about.component';
 import { environment } from '../environments/environment';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AlertService } from './services/alert.service';
+import { AuthGuard } from './guards';
+import { AuthenticationService } from './services/authentication.service';
+import { UserService } from './services/user.service';
+import { JwtInterceptor } from './helpers/jwt.interceptor';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -24,6 +31,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     HomeComponent,
     ProfileComponent,
     AboutComponent,
@@ -47,7 +55,18 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     ThemePickerModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    AlertService,
+    AuthenticationService,
+    UserService,
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: JwtInterceptor,
+        multi: true
+    },
+    fakeBackendProvider,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

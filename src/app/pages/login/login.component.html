@@ -1,0 +1,46 @@
+﻿<mat-card>
+  <mat-card-content>
+    <mat-tab-group class="login-tab" [(selectedIndex)]="selectedIndex">
+      <mat-tab label="Login">
+        <div class="app-tab-content">
+          <form name="form" (ngSubmit)="login()" #flogin="ngForm">
+            <div fxLayout="column">
+              <mat-form-field>
+                <input matInput [(ngModel)]="loginModel.email" email required #email="ngModel" name="email" placeholder="Email">
+                <mat-error *ngIf="email.invalid">Email is invalid</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput [(ngModel)]="loginModel.password" required type="password" name="password" #password="ngModel" placeholder="Password">
+              </mat-form-field>
+              <button [disabled]="!flogin.valid" mat-raised-button type="submit">Login</button>
+            </div>
+          </form>
+        </div>
+      </mat-tab>
+      <mat-tab label="Register">
+        <div class="app-tab-content">
+          <form name="form" (ngSubmit)="register(fregister)" #fregister="ngForm">
+            <div fxLayout="column">
+              <mat-form-field>
+                <input matInput [(ngModel)]="registerModel.name" required #name="ngModel" name="name" placeholder="Enter your name">
+                <mat-error *ngIf="name.invalid">Name is required</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput [(ngModel)]="registerModel.email" email required #email="ngModel" name="email" placeholder="Enter your email">
+                <mat-error *ngIf="email.invalid">Email is invalid</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <textarea matInput [(ngModel)]="registerModel.details" #details="ngModel" name="details" placeholder="Any bio!?" matTextareaAutosize
+                  matAutosizeMinRows="2"></textarea>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput type="password" name="password" [(ngModel)]="registerModel.password" #password="ngModel" required placeholder="Enter your password">
+              </mat-form-field>
+              <button [disabled]="!fregister.valid" mat-raised-button type="submit">Register</button>
+            </div>
+          </form>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>

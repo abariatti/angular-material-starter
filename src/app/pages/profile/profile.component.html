@@ -1,12 +1,12 @@
 <div fxLayoutGap="14px"  fxLayout="row" fxLayout.xs="column">
   <mat-card fxFlex="80">
     <mat-icon class="profile">account_circle</mat-icon>
-    <h2>{{selectedUser.name}}</h2>
-    <p>{{selectedUser.details}}</p>
+    <h2>{{currentUser.name}}</h2>
+    <p>{{currentUser.email}}</p>
+    <p>{{currentUser.details}}</p>
   </mat-card>
 
   <mat-card fxLayout="column" fxLayoutGap="14px">
-    <mat-slide-toggle [(ngModel)]="selectedUser.isAdmin">Is Admin?</mat-slide-toggle>
-    <mat-slide-toggle [(ngModel)]="selectedUser.isCool">Is Cool?</mat-slide-toggle>
+    <mat-slide-toggle [(ngModel)]="currentUser.isAdmin">Is Admin?</mat-slide-toggle>
   </mat-card>
 </div>
