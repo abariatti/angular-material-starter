@@ -1,5 +1,4 @@
 import { LoginComponent } from './pages/login/login.component';
-import { fakeBackendProvider } from './helpers/fake-backend.provider';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -65,7 +64,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         useClass: JwtInterceptor,
         multi: true
     },
-    fakeBackendProvider,
   ],
   bootstrap: [AppComponent]
 })

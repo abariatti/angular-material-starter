@@ -1,0 +1,16 @@
+{
+    "users": [
+        {   "id": 1,
+            "name": "john doe",
+            "email": "jdo@do.com",
+            "details": "Mystère ",
+            "password": "jdo"         
+        },
+        {   "id": 2,
+            "name": "Fred Astair",
+            "email": "fa@fa.com",
+            "details": "Dance!",
+            "password": "fa"         
+        }
+    ]
+}
