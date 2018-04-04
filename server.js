@@ -1,68 +1,65 @@
+// server.js
+var jsonServer = require('json-server')
 
-const fs = require('fs')
-const bodyParser = require('body-parser')
-const jsonServer = require('json-server')
-const jwt = require('jsonwebtoken')
+var server = jsonServer.create()
 
-const server = jsonServer.create()
-const router = jsonServer.router('./mock-server/db.json')
-const userdb = JSON.parse(fs.readFileSync('./mock-server/users.json', 'UTF-8'))
+var middlewares = jsonServer.defaults()
 
-//server.use(bodyParser.urlencoded({extended: true}))
-//server.use(bodyParser.json())
-server.use(jsonServer.defaults());
+server.use(middlewares)
 
-const SECRET_KEY = '123456789'
 
-const expiresIn = '1h'
+var config = require('./mock-server/config.js');
 
-// Create a token from a payload 
-function createToken(payload){
-  return jwt.sign(payload, SECRET_KEY, {expiresIn})
+if (config.authEnabled) {
+    var auth = require("./mock-server/auth.js");
+    server.use(auth);
 }
 
-// Verify the token 
-function verifyToken(token){
-  return  jwt.verify(token, SECRET_KEY, (err, decode) => decode !== undefined ?  decode : err)
-}
+console.log("starting api server");
+//middleware to generate delayed response, for promise learning
+server.use(function(req, res, next){
 
-// Check if the user exists in database
-function isAuthenticated({email, password}){
-  return userdb.users.findIndex(user => user.email === email && user.password === password) !== -1
-}
+    var delay_in_seconds = Math.floor(Math.random() * 0.8) + 0.3;
 
+    setTimeout(function(){
+        next();
+    }, delay_in_seconds * 1000);
 
-server.post('/auth/login', (req, res) => {
-  const {email, password} = req.body
-  if (isAuthenticated({email, password}) === false) {
-    const status = 401
-    const message = 'Incorrect email or password'
-    res.status(status).json({status, message})
-    return
-  }
-  const access_token = createToken({email, password})
-  res.status(200).json({access_token})
-})
+});
 
-server.use(/^(?!\/auth).*$/,  (req, res, next) => {
-  if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
-    const status = 401
-    const message = 'Error in authorization format'
-    res.status(status).json({status, message})
-    return
-  }
-  try {
-     verifyToken(req.headers.authorization.split(' ')[1])
-     next()
-  } catch (err) {
-    const status = 401
-    const message = 'Error access_token is revoked'
-    res.status(status).json({status, message})
-  }
-})
+// Add this before server.use(router)
 
-server.use(router)
+server.use(jsonServer.rewriter({
+  '/api/products': '/api/products/products',
+  '/api/brands': '/api/brands/brands',
+  '/api/cities': '/api/cities/cities',
+  '/api/states': '/api/states/states',
+  '/api/cart': '/api/cart/cart',
+}))
 
-server.listen(3000, () => {
-  console.log('Run Auth API Server')
+var router = jsonServer.router('./mock-server/data/products.json')
+server.use('/api/products', router)
+
+var router = jsonServer.router('./mock-server/data/brands.json')
+server.use('/api/brands', router)
+
+var router = jsonServer.router('./mock-server/data/cities.json')
+server.use('/api/cities', router)
+
+var router = jsonServer.router('./mock-server/data/states.json')
+server.use('/api/states', router)
+
+var router = jsonServer.router('./mock-server/data/cart.json')
+server.use('/api/cart', router)
+
+server.listen(7070, function () {
+  console.log('JSON API Server is running on port 7070')
+
+  console.log("End point simulate network response between 0.3-0.8 seconds ");
+
+  console.log("http://localhost:7070/api/products");
+  console.log("http://localhost:7070/api/brands");
+  console.log("http://localhost:7070/api/cities");
+  console.log("http://localhost:7070/api/states");
+  console.log("http://localhost:7070/api/cart");
 })
