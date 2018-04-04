@@ -54,7 +54,7 @@ router.post('/api/authenticate', function(req, res) {
           token: jwt
         });
     } else {
-        res.sendStatus(403);
+        res.sendStatus(401);
         console.log("incorrect username/password")
     }
 })
@@ -74,11 +74,11 @@ router.use(function(req, res, next) {
             next();
             return;
         } else {
-            res.sendStatus(403);
+            res.sendStatus(401);
         }
     } else {
     	console.log("Token failed");
-        res.sendStatus(403);
+        res.sendStatus(401);
     }
 });
 
