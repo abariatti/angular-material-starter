@@ -6,6 +6,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AuthGuard } from './guards';
 import { LoginComponent } from './pages/login/login.component';
+import { ProductComponent } from './pages/product/product.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]  },
+  { path: 'product', component: ProductComponent, canActivate: [AuthGuard]  },
 ];
 
 @NgModule({

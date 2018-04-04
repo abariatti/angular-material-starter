@@ -4,13 +4,14 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "npm run start:proxy:mock:server",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "mock:server": "node ./node_modules/json-server/bin ./mock-server/db.json --routes ./mock-server/routes.json",
-    "start:proxy": "ng serve --proxy-config proxy.conf.json"
+    "mock:server": "node server.js",
+    "start:proxy": "ng serve --proxy-config proxy.conf.json",
+    "start:proxy:mock:server": "concurrently --kill-others \"npm run mock:server\" \"npm run start:proxy\""
   },
   "private": true,
   "dependencies": {
@@ -42,8 +43,8 @@
     "@types/jasmine": "^2.8.6",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "^6.0.97",
-    "body-parser": "^1.18.2",
     "codelyzer": "^4.0.1",
+    "concurrently": "^3.5.1",
     "jasmine-core": "~2.8.0",
     "jasmine-spec-reporter": "~4.2.1",
     "json-server": "^0.12.1",
@@ -54,6 +55,7 @@
     "karma-coverage-istanbul-reporter": "^1.4.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "lodash": "^4.17.5",
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.9.1",
