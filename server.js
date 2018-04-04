@@ -35,6 +35,7 @@ server.use(jsonServer.rewriter({
   '/api/cities': '/api/cities/cities',
   '/api/states': '/api/states/states',
   '/api/cart': '/api/cart/cart',
+  '/api/users': '/api/users/users',
 }))
 
 var router = jsonServer.router('./mock-server/data/products.json')
@@ -51,6 +52,9 @@ server.use('/api/states', router)
 
 var router = jsonServer.router('./mock-server/data/cart.json')
 server.use('/api/cart', router)
+
+var router = jsonServer.router('./mock-server/data/users.json')
+server.use('/api/users', router)
 
 server.listen(7070, function () {
   console.log('JSON API Server is running on port 7070')

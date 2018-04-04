@@ -21,6 +21,7 @@ import { AuthGuard } from './guards';
 import { AuthenticationService } from './services/authentication.service';
 import { UserService } from './services/user.service';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { ProductComponent } from './pages/product/product.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -34,6 +35,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HomeComponent,
     ProfileComponent,
     AboutComponent,
+    ProductComponent,
   ],
   imports: [
     BrowserModule,
