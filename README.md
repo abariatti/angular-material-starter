@@ -22,17 +22,24 @@ This is a starter template for angular with angular material as design component
 - User authentication and registration with fake API
 - Easy mocked backend rest API using json-server
 
-## Run
-Yarn 
+
+## Pre-requisites
+- nodejs > 8
+- yarn > 1.5
+- angular cli > 1.7
+
+## Installation
 ```
+git clone https://github.com/abariatti/angular-material-starter
 yarn install 
+```
+
+## Run
+```
 yarn start 
 ```
-NPM
-```
-npm install
-npm run start
-```
+Browse: 
+http://localhost:4200/
 
 ## Angular CLI
 
