@@ -20,14 +20,15 @@ npm manifest:
     "license": "MIT",
     "scripts": {
       "ng": "ng",
-      "start": "npm run start:proxy:mock:server",
+      "start": "npm run start:proxy:mock:jwt:mock:api",
       "build": "ng build --prod",
       "test": "ng test",
       "lint": "ng lint",
       "e2e": "ng e2e",
-      "mock:server": "node ./mock-server/server.js",
+      "mock:jwt": "node ./mock-server/server.js",
+      "mock:api": "node ./node_modules/json-server/bin ./mock-server/data/db.json",
       "start:proxy": "ng serve --proxy-config proxy.conf.json",
-      "start:proxy:mock:server": "concurrently \"npm run mock:server\" \"npm run start:proxy\""
+      "mock:jwt:mock:api:start:proxy": "concurrently \"npm run mock:jwt\" \"npm run mock:api\" \"npm run start:proxy\""
     },
     "private": true,
     "dependencies": {
@@ -7804,9 +7805,9 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 3221225786
+  Exit code: 1
   Command: C:\WINDOWS\system32\cmd.exe
-  Arguments: /d /s /c npm run start:proxy:mock:server
+  Arguments: /d /s /c npm run start:proxy:mock:jwt:mock:api
   Directory: C:\Users\taabaar5\git\angular-material-starter
   Output:
   

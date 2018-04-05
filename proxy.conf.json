@@ -1,6 +1,14 @@
 {
-    "/api/*": {
-        "target": "http://localhost:7070",
-        "secure": false
-    }
+  "/api/authenticate": {
+    "target": "http://localhost:3099",
+    "secure": false
+  },
+  "/api/register": {
+    "target": "http://localhost:3099",
+    "secure": false
+  },
+  "/api/*": {
+    "target": "http://localhost:3100",
+    "secure": false
+  }
 }

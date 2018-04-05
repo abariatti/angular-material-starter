@@ -1,25 +1,18 @@
-// server.js
-var jsonServer = require('json-server')
+const express = require('express');
+const auth = require("./auth.js");
 
-var server = jsonServer.create()
+const MIN_DELAY = 0.3, MAX_DELAY = 0.8;
 
-var middlewares = jsonServer.defaults()
+const server = express();
 
-server.use(middlewares)
-
-
-var config = require('./config.js');
-
-if (config.authEnabled) {
-    var auth = require("./auth.js");
-    server.use(auth);
-}
+server.use(auth);
 
 console.log("starting api server");
-//middleware to generate delayed response, for promise learning
+
+//middleware to generate delayed response to simulate real network
 server.use(function(req, res, next){
 
-    var delay_in_seconds = Math.floor(Math.random() * 0.8) + 0.3;
+    var delay_in_seconds = Math.floor(Math.random() * MAX_DELAY) + MIN_DELAY;
 
     setTimeout(function(){
         next();
@@ -27,25 +20,11 @@ server.use(function(req, res, next){
 
 });
 
-// Add this before server.use(router)
-
-server.use(jsonServer.rewriter({
-  '/api/products*': '/api/products/products$1',
-  '/api/users*': '/api/users/users$1',
-}))
-
-var router = jsonServer.router('./mock-server/data/products.json')
-server.use('/api/products', router)
-
-var router = jsonServer.router('./mock-server/data/users.json')
-server.use('/api/users', router)
-
-server.listen(7070, function () {
-  console.log('JSON API Server is running on port 7070')
+server.listen(3099, function () {
+  console.log('JWT Authentication Server is running on port 3099')
 
   console.log("End point simulate network response between 0.3-0.8 seconds ");
 
-  console.log("http://localhost:7070/api/users");
-  console.log("http://localhost:7070/api/products");
-
-})
+  console.log("http://localhost:3099/api/authenticate");
+  console.log("http://localhost:3099/api/register");
+});
