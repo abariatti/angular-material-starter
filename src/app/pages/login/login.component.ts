@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         error => {
-          this.alertService.error(error);
+          this.alertService.error(error.message );
           this.loading = false;
         });
   }
@@ -51,16 +51,18 @@ export class LoginComponent implements OnInit {
   register(fregister: NgForm) {
     console.log(fregister);
     this.loading = true;
-    this.userService.create(this.registerModel)
+    this.authenticationService.register(this.registerModel)
       .subscribe(
+        // success
         data => {
           this.alertService.success('Registration successful', true);
           this.loginModel.email = this.registerModel.email;
           this.selectedIndex = 0;
           fregister.resetForm();
         },
+        // error
         error => {
-          this.alertService.error(error);
+          this.alertService.error(error.message);
           this.loading = false;
         });
   }

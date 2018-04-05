@@ -11,7 +11,7 @@
     "e2e": "ng e2e",
     "mock:server": "node server.js",
     "start:proxy": "ng serve --proxy-config proxy.conf.json",
-    "start:proxy:mock:server": "concurrently --kill-others \"npm run mock:server\" \"npm run start:proxy\""
+    "start:proxy:mock:server": "concurrently \"npm run mock:server\" \"npm run start:proxy\""
   },
   "private": true,
   "dependencies": {

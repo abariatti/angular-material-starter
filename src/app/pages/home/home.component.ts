@@ -30,12 +30,12 @@ export class HomeComponent implements OnInit {
         this.userService.delete(user.id).subscribe(
           success => {  },
           error => {
-            this.alertService.error(error);
+            this.alertService.error(error.message);
             this.loadAllUsers();
           }
         );
       } catch (ex) {
-        this.alertService.error(ex);
+        this.alertService.error(ex.message);
         this.loadAllUsers();
       }
   }

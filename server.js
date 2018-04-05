@@ -66,4 +66,5 @@ server.listen(7070, function () {
   console.log("http://localhost:7070/api/cities");
   console.log("http://localhost:7070/api/states");
   console.log("http://localhost:7070/api/cart");
+  console.log("http://localhost:7070/api/users");
 })
