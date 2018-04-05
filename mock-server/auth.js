@@ -60,6 +60,7 @@ router.post('/api/register', function (req, res) {
     if(findUser(user.email)){
       const status = 409;
       const message = "Email " + user.email + " already exists";
+      console.log(message);
       res.status(status).json({status, message});
 
       return;

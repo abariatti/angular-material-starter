@@ -29,7 +29,7 @@ export class AlertService {
         });
     }
 
-    error(message: string, keepAfterNavigationChange = false) {
+    error(message: string, keepAfterNavigationChange = true) {
         this.snackBar.open(message, 'Ok');
     }
 }
