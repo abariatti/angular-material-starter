@@ -1,4 +1,4 @@
 var settings =  {
-    authEnabled : true
+    authEnabled : false
 }
 module.exports = settings;

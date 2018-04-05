@@ -8,10 +8,10 @@ var middlewares = jsonServer.defaults()
 server.use(middlewares)
 
 
-var config = require('./mock-server/config.js');
+var config = require('./config.js');
 
 if (config.authEnabled) {
-    var auth = require("./mock-server/auth.js");
+    var auth = require("./auth.js");
     server.use(auth);
 }
 
@@ -30,28 +30,12 @@ server.use(function(req, res, next){
 // Add this before server.use(router)
 
 server.use(jsonServer.rewriter({
-  '/api/products': '/api/products/products',
-  '/api/brands': '/api/brands/brands',
-  '/api/cities': '/api/cities/cities',
-  '/api/states': '/api/states/states',
-  '/api/cart': '/api/cart/cart',
-  '/api/users': '/api/users/users',
+  '/api/products*': '/api/products/products$1',
+  '/api/users*': '/api/users/users$1',
 }))
 
 var router = jsonServer.router('./mock-server/data/products.json')
 server.use('/api/products', router)
-
-var router = jsonServer.router('./mock-server/data/brands.json')
-server.use('/api/brands', router)
-
-var router = jsonServer.router('./mock-server/data/cities.json')
-server.use('/api/cities', router)
-
-var router = jsonServer.router('./mock-server/data/states.json')
-server.use('/api/states', router)
-
-var router = jsonServer.router('./mock-server/data/cart.json')
-server.use('/api/cart', router)
 
 var router = jsonServer.router('./mock-server/data/users.json')
 server.use('/api/users', router)
