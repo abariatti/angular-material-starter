@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js mock:server
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js start
 
 PATH: 
   C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Cloud Foundry;C:\apache-maven-3.5.0\bin;C:\Program Files\nodejs\;C:\HashiCorp\Vagrant\bin;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\Microsoft VS Code\bin;C:\Users\taabaar5\AppData\Local\Microsoft\WindowsApps;C:\Users\taabaar5\AppData\Roaming\npm;C:\Users\taabaar5\AppData\Local\Yarn\bin
@@ -7804,9 +7804,9 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 1
+  Exit code: 3221225786
   Command: C:\WINDOWS\system32\cmd.exe
-  Arguments: /d /s /c node ./mock-server/server.js
+  Arguments: /d /s /c npm run start:proxy:mock:server
   Directory: C:\Users\taabaar5\git\angular-material-starter
   Output:
   

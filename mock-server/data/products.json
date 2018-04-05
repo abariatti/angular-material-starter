@@ -1,6 +1,6 @@
 {
     "products": [
-    
+
         {
             "brandId": 5,
             "camera": "8 MP AF CMOS sensor with xenon flash, 720p HD video recording",
@@ -1440,22 +1440,6 @@
             "storage": "32 GB",
             "weight": "159 g (5.61 oz)",
             "year": 2016
-        },
-		
-		{
-            "brandId": 5,
-            "camera": "5.0 MP AF with LED flash and geotagging, 1280 x 720 video at 30 frame/s (rear); 0.3 MP VGA (front)",
-            "cpu": "800 MHz Apple A4",
-            "display": "3.5\" 640 x 960 Retina display, 326 ppi",
-            "gpu": "PowerVR SGX 535",
-            "id": 100,
-            "name": "Apple iPhone 4",
-            "os": "iOS 4, upgradeable to iOS 7.1.2",
-            "ram": "512 MB",
-            "size": "62.8 cm3 115.2 x 58.6 x 9.3 mm",
-            "storage": "8, 16 or 32 GB",
-            "weight": "137 g",
-            "year": 2010
         }
     ]
 }
