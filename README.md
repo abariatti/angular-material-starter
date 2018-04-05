@@ -8,7 +8,8 @@ This is a starter template for angular with angular material as design component
 - angular 5
 - angular material
 - angular flex-layout
-- json-server (mock backend api)
+- embedded JWT authentication server (custom express endpoint)
+- json-server (to mock backend api)
 
 ## Features
 - Progressive Web App with angular service worker
@@ -19,6 +20,19 @@ This is a starter template for angular with angular material as design component
 - Angular Material theming with live theme change
 - Highly responsive with flex-layout
 - User authentication and registration with fake API
+- Easy mocked backend rest API using json-server
+
+## Run
+Yarn 
+```
+yarn install 
+yarn start 
+```
+NPM
+```
+npm install
+npm run start
+```
 
 ## Angular CLI
 
