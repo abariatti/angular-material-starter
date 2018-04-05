@@ -1,85 +1,93 @@
-var express = require('express');
-var router = express.Router();
+const fs = require('fs')
+const express = require('express');
+const router = express.Router();
 
 
-var bodyParser = require('body-parser');
-var jwt        = require('jsonwebtoken');
-var _ = require("lodash");
+const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
+const _ = require("lodash");
 
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-//EXAMPLE only, hardcoded, plain password
-var users =
-[
-    {   "id": 1,
-        "name": "john doe",
-        "email": "jdo@do.com",
-        "details": "Mystère ",
-        "password": "jdo"
-    },
-    {   "id": 2,
-        "name": "Fred Astair",
-        "email": "fa@fa.com",
-        "details": "Dance!",
-        "password": "fa"
-    }
-]
-
+const userdb = JSON.parse(fs.readFileSync('./mock-server/data/users.json', 'UTF-8'))
 
 //BEWARE: Not best pratice, this must be passed via environment variable or config file
-var JWT_SECRET = process.env.JWT_SECRET || "secret_key";
+const JWT_SECRET = process.env.JWT_SECRET || "secret_key";
+const expiresIn = '1h'
 
-function createToken(id){
-	return jwt.sign(id, JWT_SECRET);
+function createToken(id) {
+  return jwt.sign(id, JWT_SECRET, { expiresIn });
 }
 
-router.post('/api/authenticate', function(req, res) {
-    console.log("auth ", req.body.email);
+function verifyToken(token) {
+  return jwt.verify(token, JWT_SECRET, (err, decode) => decode !== undefined ? decode : err)
+}
 
-    var user = users.find(u => u.email === req.body.email);
+function findUser(email, password){
+  return userdb.users.find(user => user.email === email && user.password === password)
+}
 
-    if (user && user.password == req.body.password) {
-        console.log("right user name and password");
+router.post('/api/authenticate', function (req, res) {
+  const { email, password } = req.body
+  const user = findUser(email, password)
 
-       var jwt = createToken(user.email);
-       user.token = jwt;
+  if (!user) {
+    const status = 401
+    const message = 'Incorrect email or password'
+    res.status(status).json({status, message})
 
-       res.json({
-          authenticated: true,
-          email: user.email,
-          name: user.name,
-          details: user.details,
-          token: jwt
-        });
-    } else {
-        res.sendStatus(401);
-        console.log("incorrect username/password")
-    }
+    return
+  }
+  const access_token = createToken({email, password})
+  user.token = access_token
+  res.status(200).json(user)
 })
 
-router.use(function(req, res, next) {
-    var bearerToken;
-    var bearerHeader = req.headers["authorization"];
-    console.log(bearerHeader);
+router.use(function (req, res, next) {
 
-    if (typeof bearerHeader !== 'undefined') {
-        var bearer = bearerHeader.split(" ");
-        bearerToken = bearer[1];
+  if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
+    const status = 401
+    const message = 'Error in authorization format'
+    res.status(status).json({status, message})
 
-        var matchingUser = _.find(users, function(u) { return u.token == bearerToken; });
-        if (matchingUser) {
-            console.log("token found");
-            next();
-            return;
-        } else {
-            res.sendStatus(401);
-        }
-    } else {
-    	console.log("Token failed");
-        res.sendStatus(401);
-    }
+    return;
+  }
+
+  try {
+    verifyToken(req.headers.authorization.split(' ')[1])
+    next()
+ } catch (err) {
+   const status = 401
+   const message = 'Error access_token is revoked'
+   res.status(status).json({status, message})
+ }
+
+  // if (typeof bearerHeader !== 'undefined') {
+  //   var bearer = bearerHeader.split(" ");
+  //   bearerToken = bearer[1];
+  //   try {
+  //     verifyToken(bearerToken);
+  //     next();
+  //   } catch (ex) {
+  //     const status = 401
+  //     const message = 'Error access_token is revoked'
+  //     res.status(status).json({ status, message })
+  //   }
+
+  //   // var matchingUser = _.find(users, function(u) { return u.token == bearerToken; });
+  //   // if (matchingUser) {
+  //   //     console.log("token found");
+  //   //     next();
+  //   //     return;
+  //   // } else {
+  //   //     res.sendStatus(401);
+  //   // }
+  // } else {
+  //   console.log("Token failed");
+  //   res.sendStatus(401);
+  // }
 });
 
 module.exports = router;

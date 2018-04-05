@@ -8,6 +8,7 @@ This is a starter template for angular with angular material as design component
 - angular 5
 - angular material
 - angular flex-layout
+- json-server (mock backend api)
 
 ## Features
 - Progressive Web App with angular service worker
