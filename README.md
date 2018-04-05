@@ -8,7 +8,7 @@ This is a starter template for angular with angular material as design component
 - angular 5
 - angular material
 - angular flex-layout
-- embedded JWT authentication server (custom express endpoint)
+- embedded JWT authentication server (to mock authentication api)
 - json-server (to mock backend api)
 
 ## Features
