@@ -31,7 +31,7 @@ function findUser(email){
 function createUser(user){
   const userdb = JSON.parse(fs.readFileSync('./mock-server/data/users.json', 'UTF-8'))
   userdb.users.push(user);
-  fs.writeFileSync('./mock-server/data/users.json', JSON.stringify(db));
+  fs.writeFileSync('./mock-server/data/users.json', JSON.stringify(userdb));
 }
 
 router.post('/api/authenticate', function (req, res) {
@@ -71,6 +71,7 @@ router.post('/api/register', function (req, res) {
   }catch( err){
     const status = 500
     const message = err.message
+    console.log(message);
     res.status(status).json({status, message})
   }
 })

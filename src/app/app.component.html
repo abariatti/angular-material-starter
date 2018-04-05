@@ -1,15 +1,15 @@
 <mat-toolbar color="primary">
-  
+
   <button mat-icon-button (click)="snav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  
+
   <span>{{ 'TITLE' | translate }}</span>
-  
+
   <span fxFlex></span>
 
   <theme-picker (setStyle)="onSetStyle($event)"></theme-picker>
-  
+
   <button mat-icon-button [matMenuTriggerFor]="themeMenu">
     <mat-icon>account_circle</mat-icon>
   </button>
@@ -29,6 +29,11 @@
       <mat-list-item routerLink="/home" routerLinkActive="active">
         <mat-icon>home</mat-icon>
         <span>{{'PAGES.HOME.MENU' | translate }} </span>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/products" routerLinkActive="active">
+        <mat-icon>Products</mat-icon>
+        <span>Products </span>
       </mat-list-item>
 
       <mat-list-item routerLink="/about" routerLinkActive="active">

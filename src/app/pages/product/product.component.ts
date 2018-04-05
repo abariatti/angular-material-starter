@@ -1,3 +1,4 @@
+import { Product } from './../../models/products';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
@@ -8,6 +9,7 @@ import {catchError} from 'rxjs/operators/catchError';
 import {map} from 'rxjs/operators/map';
 import {startWith} from 'rxjs/operators/startWith';
 import {switchMap} from 'rxjs/operators/switchMap';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-product',
@@ -15,7 +17,7 @@ import {switchMap} from 'rxjs/operators/switchMap';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  displayedColumns = ['created', 'state', 'number', 'title'];
+  displayedColumns = ['id', 'name', 'year'];
   exampleDatabase: ExampleHttpDao | null;
   dataSource = new MatTableDataSource();
 
@@ -26,7 +28,8 @@ export class ProductComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private productService: ProductService) {}
 
   ngOnInit() {
     this.exampleDatabase = new ExampleHttpDao(this.http);
@@ -46,9 +49,9 @@ export class ProductComponent implements OnInit {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.isRateLimitReached = false;
-          this.resultsLength = data.total_count;
+          this.resultsLength = data.length;
 
-          return data.items;
+          return data;
         }),
         catchError(() => {
           this.isLoadingResults = false;
@@ -61,27 +64,15 @@ export class ProductComponent implements OnInit {
 
 }
 
-export interface GithubApi {
-  items: GithubIssue[];
-  total_count: number;
-}
-
-export interface GithubIssue {
-  created_at: string;
-  number: string;
-  state: string;
-  title: string;
-}
-
 /** An example database that the data source uses to retrieve data for the table. */
 export class ExampleHttpDao {
   constructor(private http: HttpClient) {}
 
-  getRepoIssues(sort: string, order: string, page: number): Observable<GithubApi> {
-    const href = 'https://api.github.com/search/issues';
+  getRepoIssues(sort: string, order: string, page: number): Observable<Product[]> {
+    const href = '/api/products';
     const requestUrl =
-        `${href}?q=repo:angular/material2&sort=${sort}&order=${order}&page=${page + 1}`;
+        `${href}`; // ?q=repo:angular/material2&sort=${sort}&order=${order}&page=${page + 1}
 
-    return this.http.get<GithubApi>(requestUrl);
+    return this.http.get<Product[]>(requestUrl);
   }
 }

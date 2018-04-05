@@ -1,3 +1,4 @@
+import { ProductService } from './services/product.service';
 import { LoginComponent } from './pages/login/login.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -61,6 +62,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AlertService,
     AuthenticationService,
     UserService,
+    ProductService,
     {
         provide: HTTP_INTERCEPTORS,
         useClass: JwtInterceptor,
