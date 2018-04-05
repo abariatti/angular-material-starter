@@ -45,10 +45,7 @@ server.listen(7070, function () {
 
   console.log("End point simulate network response between 0.3-0.8 seconds ");
 
-  console.log("http://localhost:7070/api/products");
-  console.log("http://localhost:7070/api/brands");
-  console.log("http://localhost:7070/api/cities");
-  console.log("http://localhost:7070/api/states");
-  console.log("http://localhost:7070/api/cart");
   console.log("http://localhost:7070/api/users");
+  console.log("http://localhost:7070/api/products");
+
 })
