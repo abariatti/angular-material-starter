@@ -43,10 +43,11 @@ export class ParseInterceptor implements HttpInterceptor {
     return next.handle(request).do((event: HttpEvent<any>) => {
       // success
     }, (err: any) => {
-      // error
+      // specific errors from parse-server
+      const parseErrors = [209, 101];
       if (err instanceof HttpErrorResponse) {
-        if (err.error.code === 209) {
-          // invalid session token
+        if (parseErrors.includes(err.error.code)) {
+          this.alertService.error(err.error.error);
           return;
         }
         if (err.status === 401) {
@@ -54,7 +55,7 @@ export class ParseInterceptor implements HttpInterceptor {
           return this.router.navigate(['login']);
         }
         console.log(err);
-        this.alertService.error(err.error.error);
+        this.alertService.error(err.message);
       }
     });
   }

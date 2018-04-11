@@ -707,7 +707,7 @@ async@^1.4.0, async@^1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
 
-async@^2.1.2, async@^2.1.4, async@^2.1.5, async@^2.4.1:
+async@^2.0.0, async@^2.1.2, async@^2.1.4, async@^2.1.5, async@^2.4.1:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.0.tgz#61a29abb6fcc026fea77e56d1c6ec53a795951f4"
   dependencies:
@@ -3257,16 +3257,6 @@ fs-access@^1.0.0:
   dependencies:
     null-check "^1.0.0"
 
-fs-extra@^0.26.7:
-  version "0.26.7"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-0.26.7.tgz#9ae1fdd94897798edab76d0918cf42d0c3184fa9"
-  dependencies:
-    graceful-fs "^4.1.2"
-    jsonfile "^2.1.0"
-    klaw "^1.0.0"
-    path-is-absolute "^1.0.0"
-    rimraf "^2.2.8"
-
 fs-extra@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-1.0.0.tgz#cd3ce5f7e7cb6145883fcae3191e9877f8587950"
@@ -5508,26 +5498,26 @@ mongodb-download-url@^0.3.0:
     request "^2.65.0"
     semver "^5.0.3"
 
-mongodb-runner@3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/mongodb-runner/-/mongodb-runner-3.2.0.tgz#0c184a1e35f7aed19bc2d868ff5af36b23de590a"
+mongodb-runner@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/mongodb-runner/-/mongodb-runner-3.6.1.tgz#d43424d0e473789b7178f495721e147eb45b0e8f"
   dependencies:
-    async "^1.5.2"
+    async "^2.0.0"
     clui "^0.3.1"
-    debug "^2.2.0"
-    fs-extra "^0.26.7"
+    debug "^3.0.1"
+    fs-extra "^4.0.2"
     is-mongodb-running "0.0.1"
     lodash.defaults "^4.0.1"
     minimist "^1.2.0"
     mkdirp "^0.5.1"
-    mongodb "^2.1.1"
+    mongodb "^2.2.8"
     mongodb-dbpath "^0.0.1"
     mongodb-tools mongodb-js/mongodb-tools
-    mongodb-version-manager "^1.0.4"
-    untildify "~2.1.0"
+    mongodb-version-manager "^1.1.1"
+    untildify "^3.0.0"
     which "^1.2.4"
 
-mongodb-tools@mongodb-js/mongodb-tools:
+"mongodb-tools@github:mongodb-js/mongodb-tools":
   version "1.2.0"
   resolved "https://codeload.github.com/mongodb-js/mongodb-tools/tar.gz/df761df21175f2c521c78b8e011a1532569f0dca"
   dependencies:
@@ -5548,7 +5538,7 @@ mongodb-version-list@^1.0.0:
     minimist "^1.1.1"
     semver "^5.0.1"
 
-mongodb-version-manager@^1.0.4:
+mongodb-version-manager@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/mongodb-version-manager/-/mongodb-version-manager-1.1.1.tgz#26438369eb69693a9e42e78df174428789f11052"
   dependencies:
@@ -5575,7 +5565,7 @@ mongodb@3.0.4:
   dependencies:
     mongodb-core "3.0.4"
 
-mongodb@^2.0.39, mongodb@^2.1.1:
+mongodb@^2.0.39, mongodb@^2.2.8:
   version "2.2.35"
   resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-2.2.35.tgz#cd1b5af8a9463e3f9a787fa5b3d05565579730f9"
   dependencies:
@@ -8546,15 +8536,9 @@ untildify@^1.0.0:
   dependencies:
     user-home "^1.0.0"
 
-untildify@^3.0.2:
+untildify@^3.0.0, untildify@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/untildify/-/untildify-3.0.2.tgz#7f1f302055b3fea0f3e81dc78eb36766cb65e3f1"
-
-untildify@~2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/untildify/-/untildify-2.1.0.tgz#17eb2807987f76952e9c0485fc311d06a826a2e0"
-  dependencies:
-    os-homedir "^1.0.0"
 
 unzip-response@^2.0.1:
   version "2.0.1"
