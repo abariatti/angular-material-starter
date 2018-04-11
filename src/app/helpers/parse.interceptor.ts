@@ -53,7 +53,8 @@ export class ParseInterceptor implements HttpInterceptor {
           // redirect to the login route
           return this.router.navigate(['login']);
         }
-        this.alertService.error(err.message);
+        console.log(err);
+        this.alertService.error(err.error.error);
       }
     });
   }

@@ -12,7 +12,7 @@ import { NgForm, FormGroup, FormControlName } from '@angular/forms';
 })
 
 export class LoginComponent implements OnInit {
-  loginModel: User = new User();
+  loginModel: any = {};
   registerModel: any = {};
   loading = false;
   returnUrl: string;
@@ -35,14 +35,10 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loading = true;
-    this.authenticationService.login(this.loginModel.email, this.loginModel.password)
+    this.authenticationService.login(this.loginModel.username, this.loginModel.password)
       .subscribe(
         data => {
           this.router.navigate([this.returnUrl]);
-        },
-        error => {
-          this.alertService.error(error.message );
-          this.loading = false;
         });
   }
 
@@ -51,7 +47,6 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authenticationService.register(this.registerModel)
       .subscribe(
-        // success
         data => {
           this.alertService.success('Registration successful', true);
           this.loginModel.email = this.registerModel.email;

@@ -9,8 +9,8 @@
           <form name="form" (ngSubmit)="login()" #flogin="ngForm">
             <div fxLayout="column">
               <mat-form-field>
-                <input matInput [(ngModel)]="loginModel.email" email required #email="ngModel" name="email" placeholder="Email">
-                <mat-error *ngIf="email.invalid">Email is invalid</mat-error>
+                <input matInput [(ngModel)]="loginModel.username" email required #username="ngModel" name="username" placeholder="Email">
+                <mat-error *ngIf="username.invalid">Email is invalid</mat-error>
               </mat-form-field>
               <mat-form-field>
                 <input matInput [(ngModel)]="loginModel.password" required type="password" name="password" #password="ngModel" placeholder="Password">
