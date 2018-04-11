@@ -10,10 +10,8 @@ import { User } from '../models/user';
 
 @Injectable()
 export class AuthenticationService {
-  private currentUser;
-  constructor(private http: HttpClient) {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  }
+
+  constructor(private http: HttpClient) { }
 
   login(username: string, password: string) {
     return this.http.get<any>('/parse/login', { params: { username: username, password: password } })
@@ -36,13 +34,13 @@ export class AuthenticationService {
 
   me(): Observable<any> {
     // best version we return cached but in the same time we check with our backend
-    if (!this.currentUser) {
+    if (!JSON.parse(localStorage.getItem('currentUser'))) {
       // we dont have a current user it ends here
       return Observable.of(undefined);
     }
     // we have a current user so we return it first
     // so it is immediately displayed
-    return Observable.of(this.currentUser)
+    return Observable.of(JSON.parse(localStorage.getItem('currentUser')))
       // ... but our user might not be authenticated anymore
       // so we check with our backend if we have it we just
       // update it (send a new value to our observable)
@@ -65,7 +63,6 @@ export class AuthenticationService {
   }
 
   private removeLocalUser() {
-    this.currentUser = undefined;
     localStorage.removeItem('currentUser');
   }
 }
