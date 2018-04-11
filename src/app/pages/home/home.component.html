@@ -2,7 +2,7 @@
   <mat-card>
     <mat-card-content>
       <div *ngIf="currentUser">
-        <h1>Hi {{currentUser.name}}!</h1>
+        <h1>Hi {{currentUser.username}}!</h1>
         <p>You're logged!!</p>
         <p>
           <a [routerLink]="['/login']">Logout</a>

@@ -9,7 +9,7 @@ import { User } from '../../models/user';
 })
 export class ProfileComponent implements OnInit {
   currentUser: any = {};
-  constructor(private authenticationService: AuthenticationService) {  }
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.authenticationService.me().subscribe(user => {

@@ -9,15 +9,18 @@ import { User } from '../../models/user';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  currentUser: User;
+  currentUser: any;
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private authenticationService: AuthenticationService) {
+
+    this.authenticationService.me().subscribe(user => {
+      this.currentUser = user;
+    });
+   }
 
   ngOnInit() {
-    if (localStorage.getItem('currentUser')) {
-      this.authenticationService.me().subscribe(user => {
-        this.currentUser = user;
-      });
-    }
+
+
   }
+
 }
