@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng server",
+    "start": "ng serve",
     "start:server": "npm run mock:mongodb-runner:mock:parse-server:start:proxy",
     "build": "ng build --prod",
     "test": "ng test",
