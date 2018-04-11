@@ -11,16 +11,11 @@ import { User } from '../../models/user';
 export class HomeComponent implements OnInit {
   currentUser: any;
 
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(private authenticationService: AuthenticationService) { }
 
+  ngOnInit() {
     this.authenticationService.me().subscribe(user => {
       this.currentUser = user;
     });
-   }
-
-  ngOnInit() {
-
-
   }
-
 }

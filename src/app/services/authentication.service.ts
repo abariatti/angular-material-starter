@@ -31,7 +31,7 @@ export class AuthenticationService {
   }
 
   me(): Observable<any> {
-    const user = localStorage.getItem('currentUser');
+    const user = JSON.parse(localStorage.getItem('currentUser'));
     return Observable.of(user);
   }
 
