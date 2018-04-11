@@ -33,9 +33,16 @@ yarn install
 ```
 
 ## Run
-```
+Without authentication and backend api 
+```bash
 yarn start 
 ```
+With mocked backend api and authentication (parse-server)
+```bash
+# you might need elevated privileges to run this properly
+yarn start:server
+```
+
 Browse: 
 http://localhost:4200/
 
