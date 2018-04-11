@@ -8,8 +8,7 @@ This is a starter template for angular with angular material as design component
 - angular 5
 - angular material
 - angular flex-layout
-- embedded JWT authentication server (to mock authentication api)
-- json-server (to mock backend api)
+- parse-server (to mock backend api)
 
 ## Features
 - Progressive Web App with angular service worker
@@ -19,8 +18,7 @@ This is a starter template for angular with angular material as design component
 - Routing module organized with pages
 - Angular Material theming with live theme change
 - Highly responsive with flex-layout
-- User authentication and registration with fake API
-- Easy mocked backend rest API using json-server
+- Easy JWT authentication & mocked backend rest API using parse-server (https://github.com/parse-community/parse-server)
 
 
 ## Pre-requisites
