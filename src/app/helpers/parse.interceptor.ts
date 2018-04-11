@@ -45,11 +45,15 @@ export class ParseInterceptor implements HttpInterceptor {
     }, (err: any) => {
       // error
       if (err instanceof HttpErrorResponse) {
-        this.alertService.error(err.message);
+        if (err.error.code === 209) {
+          // invalid session token
+          return;
+        }
         if (err.status === 401) {
           // redirect to the login route
-          this.router.navigate(['login']);
+          return this.router.navigate(['login']);
         }
+        this.alertService.error(err.message);
       }
     });
   }

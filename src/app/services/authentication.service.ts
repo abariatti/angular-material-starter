@@ -2,6 +2,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 import { User } from '../models/user';
 
 @Injectable()
@@ -28,7 +29,19 @@ export class AuthenticationService {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
       });
+  }
 
+  me() {
+    // check authentication
+    return this.http.get<any>('/parse/users/me')
+      .map(user => {
+        return user;
+      })
+      .catch(err => {
+        console.log(err);
+        localStorage.removeItem('currentUser');
+        return Observable.throw(err.statusText);
+      });
   }
 
   register(registerModel: any) {

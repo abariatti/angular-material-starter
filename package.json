@@ -4,17 +4,15 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "npm run mock:jwt:mock:api:start:proxy",
+    "start": "npm run mock:mongodb-runner:mock:parse-server:start:proxy",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "mock:jwt": "node ./mock-server/server.js",
-    "mock:api": "node ./node_modules/json-server/bin ./mock-server/data/db.json",
     "start:proxy": "ng serve --proxy-config proxy.conf.json",
-    "mock:jwt:mock:api:start:proxy": "concurrently \"npm run mock:jwt\" \"npm run mock:api\" \"npm run start:proxy\"",
-    "test:mongodb-runner":"node ./node_modules/mongodb-runner/bin/mongodb-runner.js start",
-    "test:parse":"parse-server --appId ANGULAR_MATERIAL_STARTER --masterKey MASTER_KEY --databaseURI mongodb://localhost/test"
+    "mock:mongodb-runner:mock:parse-server:start:proxy": "npm run mock:mongodb-runner & concurrently \"npm run mock:parse-server\" \"npm run start:proxy\"",
+    "mock:mongodb-runner":"node ./node_modules/mongodb-runner/bin/mongodb-runner.js start",
+    "mock:parse-server":"node ./node_modules/parse-server/bin/parse-server --appId ANGULAR_MATERIAL_STARTER --masterKey MASTER_KEY --databaseURI mongodb://localhost/test"
   },
   "private": true,
   "dependencies": {

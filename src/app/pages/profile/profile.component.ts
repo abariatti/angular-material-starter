@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 
@@ -7,12 +8,12 @@ import { User } from '../../models/user';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  currentUser: User;
-  constructor() {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  }
+  currentUser: any = {};
+  constructor(private authenticationService: AuthenticationService) {  }
 
   ngOnInit() {
+    this.authenticationService.me().subscribe(user => {
+      this.currentUser = user;
+    });
   }
-
 }
