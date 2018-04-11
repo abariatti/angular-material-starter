@@ -38,9 +38,8 @@ export class AuthenticationService {
         return user;
       })
       .catch(err => {
-        console.log(err);
         localStorage.removeItem('currentUser');
-        return Observable.throw(err.statusText);
+        throw(err);
       });
   }
 

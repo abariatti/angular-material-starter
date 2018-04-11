@@ -14,8 +14,10 @@ export class HomeComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
-    this.authenticationService.me().subscribe(user => {
-      this.currentUser = user;
-    });
+    if (localStorage.getItem('currentUser')) {
+      this.authenticationService.me().subscribe(user => {
+        this.currentUser = user;
+      });
+    }
   }
 }
