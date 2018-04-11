@@ -1,3 +1,5 @@
+// import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { ParseInterceptor } from './helpers/parse.interceptor';
 import { ProductService } from './services/product.service';
 import { LoginComponent } from './pages/login/login.component';
 import { NgModule } from '@angular/core';
@@ -18,10 +20,8 @@ import { AboutComponent } from './pages/about/about.component';
 import { environment } from '../environments/environment';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AlertService } from './services/alert.service';
-import { AuthGuard } from './guards';
+import { AuthGuard } from './guards/auth.guard';
 import { AuthenticationService } from './services/authentication.service';
-import { UserService } from './services/user.service';
-import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ProductComponent } from './pages/product/product.component';
 
 // AoT requires an exported function for factories
@@ -61,11 +61,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     AuthGuard,
     AlertService,
     AuthenticationService,
-    UserService,
     ProductService,
     {
         provide: HTTP_INTERCEPTORS,
-        useClass: JwtInterceptor,
+        useClass: ParseInterceptor,
         multi: true
     },
   ],

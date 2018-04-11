@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { AlertService } from '../../services/alert.service';
-import { UserService } from '../../services/user.service';
 import { NgForm, FormGroup, FormControlName } from '@angular/forms';
 
 @Component({
@@ -24,7 +23,6 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private alertService: AlertService,
-    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -59,11 +57,6 @@ export class LoginComponent implements OnInit {
           this.loginModel.email = this.registerModel.email;
           this.selectedIndex = 0;
           fregister.resetForm();
-        },
-        // error
-        error => {
-          this.alertService.error(error.error.message);
-          this.loading = false;
         });
   }
 }

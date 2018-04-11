@@ -6,22 +6,22 @@ export class ProductService {
     constructor(private http: HttpClient) { }
 
     getAll() {
-        return this.http.get<any[]>('/api/products');
+        return this.http.get<any[]>('/parse/products');
     }
 
     getById(id: number) {
-        return this.http.get('/api/products/' + id);
+        return this.http.get('/parse/products/' + id);
     }
 
-    create(user: any) {
-        return this.http.post('/api/products', user);
+    create(product: any) {
+        return this.http.post('/parse/products', product);
     }
 
-    update(user: any) {
-        return this.http.put('/api/products/' + user.id, user);
+    update(product: any) {
+        return this.http.put('/parse/products/' + product.id, product);
     }
 
     delete(id: number) {
-        return this.http.delete('/api/products/' + id);
+        return this.http.delete('/parse/products/' + id);
     }
 }

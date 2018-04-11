@@ -12,7 +12,9 @@
     "mock:jwt": "node ./mock-server/server.js",
     "mock:api": "node ./node_modules/json-server/bin ./mock-server/data/db.json",
     "start:proxy": "ng serve --proxy-config proxy.conf.json",
-    "mock:jwt:mock:api:start:proxy": "concurrently \"npm run mock:jwt\" \"npm run mock:api\" \"npm run start:proxy\""
+    "mock:jwt:mock:api:start:proxy": "concurrently \"npm run mock:jwt\" \"npm run mock:api\" \"npm run start:proxy\"",
+    "test:mongodb-runner":"node ./node_modules/mongodb-runner/bin/mongodb-runner.js start",
+    "test:parse":"parse-server --appId ANGULAR_MATERIAL_STARTER --masterKey MASTER_KEY --databaseURI mongodb://localhost/test"
   },
   "private": true,
   "dependencies": {
@@ -57,6 +59,8 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "lodash": "^4.17.5",
+    "mongodb-runner": "^3.6.1",
+    "parse-server": "^2.7.4",
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.9.1",

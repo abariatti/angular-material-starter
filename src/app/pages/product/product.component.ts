@@ -17,7 +17,8 @@ import { ProductService } from '../../services/product.service';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  displayedColumns = ['id', 'name', 'year'];
+  product: any = {};
+  displayedColumns = ['id', 'name', 'price', 'quantity'];
   exampleDatabase: ExampleHttpDao | null;
   dataSource = new MatTableDataSource();
 
@@ -42,7 +43,7 @@ export class ProductComponent implements OnInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.exampleDatabase!.getRepoIssues(
+          return this.exampleDatabase!.getProducts(
             this.sort.active, this.sort.direction, this.paginator.pageIndex);
         }),
         map(data => {
@@ -62,14 +63,18 @@ export class ProductComponent implements OnInit {
       ).subscribe(data => this.dataSource.data = data);
   }
 
+  onSubmit() {
+    console.log(this.product);
+    this.productService.create(this.product);
+  }
 }
 
 /** An example database that the data source uses to retrieve data for the table. */
 export class ExampleHttpDao {
   constructor(private http: HttpClient) {}
 
-  getRepoIssues(sort: string, order: string, page: number): Observable<Product[]> {
-    const href = '/api/products';
+  getProducts(sort: string, order: string, page: number): Observable<Product[]> {
+    const href = '/parse/products';
     const requestUrl =
         `${href}`; // ?q=repo:angular/material2&sort=${sort}&order=${order}&page=${page + 1}
 

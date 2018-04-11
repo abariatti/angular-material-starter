@@ -6,20 +6,39 @@ import { AlertService } from '../services/alert.service';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class JwtInterceptor implements HttpInterceptor {
+export class ParseInterceptor implements HttpInterceptor {
 
   constructor(private alertService: AlertService, private router: Router) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
     // add authorization header with jwt token if available
+    const applicationId = 'ANGULAR_MATERIAL_STARTER';
+    const restApiKey = undefined;
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser && currentUser.token) {
+
+    request = request.clone({
+      setHeaders: {
+        'X-Parse-Application-Id': applicationId
+      }
+    });
+
+    if (restApiKey) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${currentUser.token}`
+          'X-Parse-REST-API-Key': restApiKey
         }
       });
     }
+
+    if (currentUser && currentUser.sessionToken) {
+      request = request.clone({
+        setHeaders: {
+          'X-Parse-Session-Token': currentUser.sessionToken
+        }
+      });
+    }
+
 
     return next.handle(request).do((event: HttpEvent<any>) => {
       // success
