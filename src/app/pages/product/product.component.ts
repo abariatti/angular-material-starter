@@ -74,10 +74,12 @@ export class ExampleHttpDao {
   constructor(private http: HttpClient) {}
 
   getProducts(sort: string, order: string, page: number): Observable<Product[]> {
-    const href = '/parse/products';
+    const href = '/parse/classes/products';
     const requestUrl =
         `${href}`; // ?q=repo:angular/material2&sort=${sort}&order=${order}&page=${page + 1}
 
-    return this.http.get<Product[]>(requestUrl);
+    return this.http.get<any>(requestUrl).map(res => {
+      return <Product[]>res.results;
+    });
   }
 }
