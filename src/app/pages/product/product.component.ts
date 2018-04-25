@@ -10,6 +10,7 @@ import {map} from 'rxjs/operators/map';
 import {startWith} from 'rxjs/operators/startWith';
 import {switchMap} from 'rxjs/operators/switchMap';
 import { ProductService } from '../../services/product.service';
+import 'rxjs/add/operator/takeWhile';
 
 @Component({
   selector: 'app-product',
@@ -19,67 +20,36 @@ import { ProductService } from '../../services/product.service';
 export class ProductComponent implements OnInit {
   product: any = {};
   displayedColumns = ['id', 'name', 'price', 'quantity'];
-  exampleDatabase: ExampleHttpDao | null;
+  products: Observable<Product[]>;
   dataSource = new MatTableDataSource();
 
   resultsLength = 0;
   isLoadingResults = true;
   isRateLimitReached = false;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  private alive = true;
 
   constructor(private http: HttpClient,
     private productService: ProductService) {}
 
   ngOnInit() {
-    this.exampleDatabase = new ExampleHttpDao(this.http);
+    this.getProducts();
+  }
 
-    // If the user changes the sort order, reset back to the first page.
-    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+  private getProducts() {
+    this.productService.getAll().takeWhile(() => this.alive).subscribe(products => {
+      this.dataSource.data = products;
+    });
+  }
 
-    merge(this.sort.sortChange, this.paginator.page)
-      .pipe(
-        startWith({}),
-        switchMap(() => {
-          this.isLoadingResults = true;
-          return this.exampleDatabase!.getProducts(
-            this.sort.active, this.sort.direction, this.paginator.pageIndex);
-        }),
-        map(data => {
-          // Flip flag to show that loading has finished.
-          this.isLoadingResults = false;
-          this.isRateLimitReached = false;
-          this.resultsLength = data.length;
-
-          return data;
-        }),
-        catchError(() => {
-          this.isLoadingResults = false;
-          // Catch if the GitHub API has reached its rate limit. Return empty data.
-          this.isRateLimitReached = true;
-          return observableOf([]);
-        })
-      ).subscribe(data => this.dataSource.data = data);
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 
   onSubmit() {
     console.log(this.product);
     this.productService.create(this.product);
-  }
-}
-
-/** An example database that the data source uses to retrieve data for the table. */
-export class ExampleHttpDao {
-  constructor(private http: HttpClient) {}
-
-  getProducts(sort: string, order: string, page: number): Observable<Product[]> {
-    const href = '/parse/classes/products';
-    const requestUrl =
-        `${href}`; // ?q=repo:angular/material2&sort=${sort}&order=${order}&page=${page + 1}
-
-    return this.http.get<any>(requestUrl).map(res => {
-      return <Product[]>res.results;
-    });
+    this.getProducts();
   }
 }
