@@ -7,6 +7,8 @@
 // **Be sure that you only ever include this mixin once!**
 @include mat-core();
 
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+
 // Import indigo-pink theme (that will be our default).
 @import './assets/custom-themes/indigo-pink.scss';
 
