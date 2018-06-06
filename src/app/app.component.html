@@ -8,13 +8,15 @@
 
   <span fxFlex></span>
 
+  <!-- <app-theme-picker (setStyle)="onSetStyle($event)"></app-theme-picker> -->
+
   <theme-picker (setStyle)="onSetStyle($event)"></theme-picker>
 
-  <button mat-icon-button [matMenuTriggerFor]="themeMenu">
+  <button mat-icon-button [matMenuTriggerFor]="profileMenu">
     <mat-icon>account_circle</mat-icon>
   </button>
 
-  <mat-menu #themeMenu x-position="after">
+  <mat-menu #profileMenu x-position="after">
     <button routerLink="/profile" mat-menu-item>Profile</button>
   </mat-menu>
 
@@ -34,6 +36,11 @@
       <mat-list-item routerLink="/products" routerLinkActive="active">
         <mat-icon>local_grocery_store</mat-icon>
         <span>Products </span>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/dynamic-forms" routerLinkActive="active">
+        <mat-icon>receipt</mat-icon>
+        <span>Dynamic forms </span>
       </mat-list-item>
 
       <mat-list-item routerLink="/about" routerLinkActive="active">

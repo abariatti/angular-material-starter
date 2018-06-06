@@ -231,6 +231,14 @@
   dependencies:
     tslib "^1.9.0"
 
+"@ng-dynamic-forms/core@^6.0.5":
+  version "6.0.5"
+  resolved "https://registry.yarnpkg.com/@ng-dynamic-forms/core/-/core-6.0.5.tgz#2294d0109040b219090f55d123c13279c4ea8ced"
+
+"@ng-dynamic-forms/ui-material@^6.0.5":
+  version "6.0.5"
+  resolved "https://registry.yarnpkg.com/@ng-dynamic-forms/ui-material/-/ui-material-6.0.5.tgz#7c0804aca1fa103dd148eaa10a151f64ae345dd3"
+
 "@ngtools/webpack@6.0.8":
   version "6.0.8"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-6.0.8.tgz#a05bce526aee9da62bb230a95fba83fee99d0bca"
@@ -512,6 +520,12 @@ align-text@^0.1.1, align-text@^0.1.3:
 amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
+
+angular2-text-mask@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/angular2-text-mask/-/angular2-text-mask-9.0.0.tgz#70490170a8096241fc3ce9482ed6a758ddbce8ea"
+  dependencies:
+    text-mask-core "^5.0.0"
 
 ansi-html@0.0.7:
   version "0.0.7"
@@ -2655,6 +2669,10 @@ globule@^1.0.0:
 graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
+
+hammerjs@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/hammerjs/-/hammerjs-2.0.8.tgz#04ef77862cff2bb79d30f7692095930222bf60f1"
 
 handle-thing@^1.2.5:
   version "1.2.5"
@@ -5819,6 +5837,10 @@ tar@^4:
     mkdirp "^0.5.0"
     safe-buffer "^5.1.2"
     yallist "^3.0.2"
+
+text-mask-core@^5.0.0:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/text-mask-core/-/text-mask-core-5.1.1.tgz#a7f65634e11236818fd36a92668e17bf9368f357"
 
 through2@^2.0.0:
   version "2.0.3"

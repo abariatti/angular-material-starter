@@ -1,60 +1,61 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, NgModule, OnInit } from '@angular/core';
-import { ThemeStorage, DocsSiteTheme } from './theme-storage/theme-storage';
+import {Component, ViewEncapsulation, ChangeDetectionStrategy, NgModule, Output, EventEmitter} from '@angular/core';
+import {ThemeStorage, DocsSiteTheme} from './theme-storage/theme-storage';
 import {
   MatButtonModule, MatGridListModule, MatIconModule, MatMenuModule,
   MatTooltipModule
 } from '@angular/material';
-import { CommonModule } from '@angular/common';
-import { Input, Output, EventEmitter } from '@angular/core';
+import {CommonModule} from '@angular/common';
+
 
 @Component({
-  selector: 'app-theme-picker',
+  selector: 'theme-picker',
   templateUrl: 'theme-picker.html',
   styleUrls: ['theme-picker.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated,
+  encapsulation: ViewEncapsulation.None,
+  host: {'aria-hidden': 'true'},
 })
-export class ThemePickerComponent implements OnInit {
+export class ThemePicker {
   @Output() setStyle: EventEmitter<String> = new EventEmitter();
 
-  currentTheme;
-  defaultTheme;
-
-  themes: DocsSiteTheme[] = [
+  themes = [
     {
       primary: '#673AB7',
       accent: '#FFC107',
-      class: 'deep-purple-amber-theme',
+      class: 'pink-blue-grey-theme',
       isDark: false,
+      href: ''
     },
     {
       primary: '#3F51B5',
       accent: '#E91E63',
-      class: 'indigo-pink-theme',
+      class: 'pink-blue-grey-theme',
       isDark: false,
       isDefault: true,
+      href: ''
     },
     {
       primary: '#E91E63',
       accent: '#607D8B',
       class: 'pink-blue-grey-theme',
       isDark: true,
+      href: ''
     },
     {
       primary: '#9C27B0',
       accent: '#4CAF50',
-      class: 'purple-green-theme',
+      class: 'pink-blue-grey-theme',
       isDark: true,
+      href: ''
     },
   ];
-
-  constructor(private _themeStorage: ThemeStorage) {
+  currentTheme;
+  defaultTheme;
+  constructor(
+    private _themeStorage: ThemeStorage
+  ) {
     this.currentTheme = this._themeStorage.getStoredTheme();
     this.defaultTheme = this.themes.find(theme => theme.isDefault);
-  }
-
-  ngOnInit() {
-    this.installTheme(this.currentTheme || this.defaultTheme);
   }
 
   installTheme(theme: DocsSiteTheme) {
@@ -69,3 +70,18 @@ export class ThemePickerComponent implements OnInit {
     return this.themes.find(theme => theme.class === className);
   }
 }
+
+@NgModule({
+  imports: [
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatGridListModule,
+    MatTooltipModule,
+    CommonModule
+  ],
+  exports: [ThemePicker],
+  declarations: [ThemePicker],
+  providers: [ThemeStorage],
+})
+export class ThemePickerModule { }
