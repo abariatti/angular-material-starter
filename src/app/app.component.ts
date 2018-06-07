@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { TranslateService } from '@ngx-translate/core';
+import { ThemePickerEvent } from './shared/theme-picker';
 
 @Component({
   selector: 'app-root',
@@ -10,21 +11,21 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent implements OnInit {
   constructor(
-    private _translate: TranslateService,
-    private _element: ElementRef,
-    private _overlayContainer: OverlayContainer
+    private translate: TranslateService,
+    private element: ElementRef,
+    private overlayContainer: OverlayContainer
   ) {
-    _translate.setDefaultLang('en');
+    translate.setDefaultLang('en');
   }
 
   ngOnInit() {
 
   }
 
-  onSetStyle(event) {
-    this._element.nativeElement.className = '';
-    this._overlayContainer.getContainerElement().className = '';
-    this._element.nativeElement.classList.add(event);
-    this._overlayContainer.getContainerElement().classList.add(event);
+  onSetStyle(event: ThemePickerEvent) {
+    this.element.nativeElement.classList.remove(event.removeClass);
+    this.element.nativeElement.classList.add(event.addClass);
+    this.overlayContainer.getContainerElement().classList.add(event.removeClass);
+    this.overlayContainer.getContainerElement().classList.add(event.addClass);
   }
 }

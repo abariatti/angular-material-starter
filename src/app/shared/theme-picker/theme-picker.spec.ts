@@ -1,5 +1,5 @@
 import {async, TestBed} from '@angular/core/testing';
-import {ThemePicker, ThemePickerModule} from './theme-picker';
+import {ThemePickerComponent, ThemePickerModule} from './theme-picker';
 import {DocsAppTestingModule} from '../../testing/testing-module';
 
 
@@ -11,7 +11,7 @@ describe('ThemePicker', () => {
   }));
 
   it('should install theme based on href', () => {
-    const fixture = TestBed.createComponent(ThemePicker);
+    const fixture = TestBed.createComponent(ThemePickerComponent);
     const component = fixture.componentInstance;
     const href = 'pink-bluegrey.css';
     spyOn(component.styleManager, 'setStyle');

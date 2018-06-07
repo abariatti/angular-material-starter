@@ -26,9 +26,7 @@ import { NgDynamicFormsComponent } from './pages/ng-dynamic-forms/ng-dynamic-for
 import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
 import { DynamicFormsCoreModule } from '@ng-dynamic-forms/core';
 import { NgDynamicFormsService } from './pages/ng-dynamic-forms/ng-dynamic-forms.service';
-import { ThemePickerModule } from 'src/app/theme-picker';
-
-
+import { ThemePickerModule } from './shared/theme-picker';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
