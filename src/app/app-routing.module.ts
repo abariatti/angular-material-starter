@@ -14,13 +14,17 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]  },
-  { path: 'products', component: ProductComponent, canActivate: [AuthGuard]  },
-  { path: 'dynamic-forms', component: NgDynamicFormsComponent }
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'products', component: ProductComponent, canActivate: [AuthGuard] },
+  { path: 'dynamic-forms-1', component: NgDynamicFormsComponent },
+  {
+    path: 'dynamic-form-example',
+    loadChildren: './pages/dynamic-form-example/dynamic-form-example.module#DynamicFormExampleModule'
+  }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes)],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
