@@ -14,6 +14,7 @@ import {
 } from '@angular/material';
 import {CommonModule} from '@angular/common';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { ThemePickerService } from './theme-picker.service';
 
 
 @Component({
@@ -24,69 +25,15 @@ import { OverlayContainer } from '@angular/cdk/overlay';
   encapsulation: ViewEncapsulation.None
 })
 export class ThemePickerComponent {
-  @Output() setStyle: EventEmitter<ThemePickerEvent> = new EventEmitter();
+  themes: DocsSiteTheme[];
 
-  themes = [
-    {
-      primary: '#673AB7',
-      accent: '#FFC107',
-      class: 'deep-purple-amber-theme',
-      isDark: false,
-      href: ''
-    },
-    {
-      primary: '#3F51B5',
-      accent: '#E91E63',
-      class: 'indigo-pink-theme',
-      isDark: false,
-      isDefault: true,
-      href: ''
-    },
-    {
-      primary: '#E91E63',
-      accent: '#607D8B',
-      class: 'pink-blue-grey-theme',
-      isDark: true,
-      href: ''
-    },
-    {
-      primary: '#9C27B0',
-      accent: '#4CAF50',
-      class: 'purple-green-theme',
-      isDark: true,
-      href: ''
-    },
-  ];
-  currentTheme;
-  defaultTheme;
-  appInstance;
-
-  constructor(
-    private themeStorage: ThemeStorage,
-    private overlayContainer: OverlayContainer,
-    private applicationRef: ApplicationRef
-  ) {
-    this.currentTheme = this.themeStorage.getStoredTheme();
-    this.defaultTheme = this.themes.find(theme => theme.isDefault);
+  constructor(private themePickerService: ThemePickerService) {
+    this.themes = this.themePickerService.themes;
   }
 
   installTheme(theme: DocsSiteTheme) {
-    this.setStyle.emit({addClass: theme.class, removeClass: this.currentTheme.class});
-    this.currentTheme = this.getCurrentThemeFromClass(theme.class);
-    if (this.currentTheme) {
-      this.themeStorage.storeTheme(this.currentTheme);
-    }
+    this.themePickerService.installTheme(theme);
   }
-
-  private getCurrentThemeFromClass(className: string): DocsSiteTheme {
-    return this.themes.find(theme => theme.class === className);
-  }
-
-}
-
-export class ThemePickerEvent {
-  addClass: string;
-  removeClass: string;
 }
 
 @NgModule({

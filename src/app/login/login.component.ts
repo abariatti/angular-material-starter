@@ -1,8 +1,8 @@
-﻿import { User } from './../../models/user';
+﻿import { User } from './../models/user';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthenticationService } from '../../services/authentication.service';
-import { AlertService } from '../../services/alert.service';
+import { AuthenticationService } from '../services/authentication.service';
+import { AlertService } from '../services/alert.service';
 import { NgForm, FormGroup, FormControlName } from '@angular/forms';
 
 @Component({

@@ -22,15 +22,8 @@
 // Import pink-blue-grey theme.
 @import './assets/custom-themes/purple-green.scss';
 
-
 html, body {
   font-family: Roboto, Arial, sans-serif;
   margin: 0;
-  height: 100%;
-}
-
-app-root {
-  display: flex;
-  flex-direction: column;
   height: 100%;
 }

@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  mat-card {
+    width: 400px;
+  }
+}
+
+
+.app-tab-content {
+  .mat-form-field {
+    padding-top: 8px;
+  }
+}

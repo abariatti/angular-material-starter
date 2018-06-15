@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+
+.main-container {
+    padding: 25px;
+}
+
+mat-list-item.active {
+    background: rgba(0,0,0,0.2) !important;
+}

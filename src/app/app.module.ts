@@ -1,7 +1,7 @@
-// import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { PagesNavComponent } from './pages/pages-nav.component';
 import { ParseInterceptor } from './helpers/parse.interceptor';
 import { ProductService } from './services/product.service';
-import { LoginComponent } from './pages/login/login.component';
+import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -22,10 +22,8 @@ import { AlertService } from './services/alert.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthenticationService } from './services/authentication.service';
 import { ProductComponent } from './pages/product/product.component';
-import { NgDynamicFormsComponent } from './pages/ng-dynamic-forms/ng-dynamic-forms.component';
 import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
 import { DynamicFormsCoreModule } from '@ng-dynamic-forms/core';
-import { NgDynamicFormsService } from './pages/ng-dynamic-forms/ng-dynamic-forms.service';
 import { ThemePickerModule } from './shared/theme-picker';
 
 // AoT requires an exported function for factories
@@ -36,12 +34,12 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
+    PagesNavComponent,
     LoginComponent,
     HomeComponent,
     ProfileComponent,
     AboutComponent,
     ProductComponent,
-    NgDynamicFormsComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +72,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         useClass: ParseInterceptor,
         multi: true
     },
-    NgDynamicFormsService
   ],
   bootstrap: [AppComponent]
 })
