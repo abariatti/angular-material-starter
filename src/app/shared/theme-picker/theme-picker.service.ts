@@ -1,6 +1,5 @@
 // src/app/timer/timer.service.ts
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs';
 import { DocsSiteTheme, ThemeStorage } from './theme-storage/theme-storage';
 
