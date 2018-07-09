@@ -9,7 +9,7 @@ import { DocsSiteTheme, ThemeStorage } from './theme-storage/theme-storage';
 })
 export class ThemePickerService {
 
-  themes: DocsSiteTheme[] = [
+  public themes: DocsSiteTheme[] = [
     {
       primary: '#673AB7',
       accent: '#FFC107',
@@ -40,7 +40,6 @@ export class ThemePickerService {
       href: ''
     },
   ];
-
   private themeSource = new BehaviorSubject<DocsSiteTheme>(this.themes.find(theme => theme.isDefault));
   public theme$ = this.themeSource.asObservable();
 
@@ -48,13 +47,8 @@ export class ThemePickerService {
     this.themeSource.next(this.themeStorage.getStoredTheme());
   }
 
-  installTheme(theme: DocsSiteTheme) {
+  public installTheme(theme: DocsSiteTheme) {
     this.themeSource.next(theme);
     this.themeStorage.storeTheme(theme);
   }
-
-  public destroy() {
-    // clean timeout reference
-  }
-
 }
