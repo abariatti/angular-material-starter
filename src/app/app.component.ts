@@ -18,9 +18,15 @@ export class AppComponent implements OnInit {
   ) {
     this.translate.setDefaultLang('en');
     this.themePickerService.theme$.subscribe(t => {
-      this.element.nativeElement.classList.remove('');
+      this.themePickerService.themes.forEach(theme => {
+        if (this.element.nativeElement.classList.contains(theme.class)) {
+          this.element.nativeElement.classList.remove(theme.class);
+        }
+        if (this.overlayContainer.getContainerElement().classList.contains(theme.class)) {
+          this.overlayContainer.getContainerElement().classList.remove(theme.class);
+        }
+      });
       this.element.nativeElement.classList.add(t.class);
-      this.overlayContainer.getContainerElement().classList.remove('');
       this.overlayContainer.getContainerElement().classList.add(t.class);
     });
   }

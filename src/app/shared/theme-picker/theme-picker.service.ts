@@ -43,6 +43,7 @@ export class ThemePickerService {
 
   private themeSource = new BehaviorSubject<DocsSiteTheme>(this.themes.find(theme => theme.isDefault));
   public theme$ = this.themeSource.asObservable();
+
   constructor(private themeStorage: ThemeStorage) {
     this.themeSource.next(this.themeStorage.getStoredTheme());
   }

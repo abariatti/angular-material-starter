@@ -5,7 +5,8 @@ import {
   NgModule,
   Output,
   EventEmitter,
-  ApplicationRef
+  ApplicationRef,
+  OnInit
 } from '@angular/core';
 import {ThemeStorage, DocsSiteTheme} from './theme-storage/theme-storage';
 import {
@@ -15,6 +16,7 @@ import {
 import {CommonModule} from '@angular/common';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { ThemePickerService } from './theme-picker.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -26,9 +28,11 @@ import { ThemePickerService } from './theme-picker.service';
 })
 export class ThemePickerComponent {
   themes: DocsSiteTheme[];
+  currentTheme$: Observable<DocsSiteTheme>;
 
   constructor(private themePickerService: ThemePickerService) {
     this.themes = this.themePickerService.themes;
+    this.currentTheme$ = this.themePickerService.theme$;
   }
 
   installTheme(theme: DocsSiteTheme) {
