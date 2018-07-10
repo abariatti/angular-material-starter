@@ -17,8 +17,7 @@ const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'about', component: AboutComponent },
-      { path: 'profile', component: ProfileComponent },
-      { path: 'profile-with-guard', component: ProfileComponent, canActivate: [AuthGuard] },
+      { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
       { path: 'products', component: ProductComponent },
       { path: 'dynamic-form-example', loadChildren: './pages/dynamic-form-example/dynamic-form-example.module#DynamicFormExampleModule' }
     ]
