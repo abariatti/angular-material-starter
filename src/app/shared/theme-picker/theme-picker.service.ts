@@ -1,7 +1,8 @@
 // src/app/timer/timer.service.ts
-import { Injectable } from '@angular/core';
+import { Injectable, ElementRef } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DocsSiteTheme, ThemeStorage } from './theme-storage/theme-storage';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Injectable({
   providedIn: 'root',
@@ -49,5 +50,20 @@ export class ThemePickerService {
   public installTheme(theme: DocsSiteTheme) {
     this.themeSource.next(theme);
     this.themeStorage.storeTheme(theme);
+  }
+
+  public register(element: ElementRef, overlayContainer: OverlayContainer) {
+    this.theme$.subscribe(t => {
+    this.themes.forEach(theme => {
+      if (element.nativeElement.classList.contains(theme.class)) {
+        element.nativeElement.classList.remove(theme.class);
+      }
+      if (overlayContainer.getContainerElement().classList.contains(theme.class)) {
+        overlayContainer.getContainerElement().classList.remove(theme.class);
+      }
+    });
+    element.nativeElement.classList.add(t.class);
+    overlayContainer.getContainerElement().classList.add(t.class);
+  });
   }
 }
