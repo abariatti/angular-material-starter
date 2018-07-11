@@ -1,0 +1,21 @@
+<mat-toolbar color="primary">
+
+  <button mat-icon-button (click)="clickMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span>{{ 'TITLE' | translate }}</span>
+
+  <span fxFlex></span>
+
+  <app-theme-picker></app-theme-picker>
+
+  <button mat-icon-button [matMenuTriggerFor]="profileMenu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+
+  <mat-menu #profileMenu x-position="after">
+    <button routerLink="/profile" mat-menu-item>Profile</button>
+  </mat-menu>
+
+</mat-toolbar>

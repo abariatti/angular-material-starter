@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { TranslateService } from '@ngx-translate/core';
-import { ThemePickerService } from './navigation/theme-picker/theme-picker.service';
+import { ThemePickerService } from './layout/theme-picker/theme-picker.service';
 
 @Component({
   selector: 'app-root',

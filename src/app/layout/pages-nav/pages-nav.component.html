@@ -1,0 +1,14 @@
+<app-toolbar (menuClicked)="snav.toggle()"></app-toolbar>
+
+<mat-sidenav-container fxLayout="row" fxFlex>
+  <mat-sidenav #snav mode="push" closed>
+    <app-side-menu-items></app-side-menu-items>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="main-container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

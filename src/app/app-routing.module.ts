@@ -1,4 +1,4 @@
-import { PagesNavComponent } from './navigation/pages-nav/pages-nav.component';
+import { PagesNavComponent } from './layout/pages-nav/pages-nav.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';

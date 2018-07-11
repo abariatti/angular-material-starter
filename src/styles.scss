@@ -28,7 +28,7 @@ $purple-green-theme:   mat-dark-theme($purple-green-primary, $purple-green-accen
 
 
 // Components
-@import './app/navigation/pages-nav/pages-nave.component.theme.scss';
+@import './app/layout/pages-nav/pages-nave.component.theme.scss';
 // you only have to add additional componenets here (instead of in every theme class)
 @mixin custom-components-theme($theme) {
   @include pages-nav-component-theme($theme);
