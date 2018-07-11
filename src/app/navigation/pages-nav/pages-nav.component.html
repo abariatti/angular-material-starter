@@ -46,6 +46,25 @@
         <span>Profile with guard</span>
       </mat-list-item>
 
+      <mat-expansion-panel class="app-naviation-expansion-panel active" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Expansible menu
+          </mat-panel-title>
+          <mat-panel-description>
+            Currently I am {{panelOpenState ? 'open' : 'closed'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list-item routerLink="/another" routerLinkActive="active">
+          <mat-icon>help</mat-icon>
+          <span>Another menu </span>
+        </mat-list-item>
+        <mat-list-item routerLink="/another-one" routerLinkActive="active">
+          <mat-icon>help</mat-icon>
+          <span>And another one</span>
+        </mat-list-item>
+      </mat-expansion-panel>
+
       <mat-list-item routerLink="/about" routerLinkActive="active">
         <mat-icon>help</mat-icon>
         <span>about </span>

@@ -1,26 +1,61 @@
+// Angular material
+// ----------------
 // Include material icons
 @import url('//fonts.googleapis.com/icon?family=Material+Icons');
-
-/* You can add global styles to this file, and also import other style files */
 // Include angulat material theming
 @import '~@angular/material/theming';
-
-// **Be sure that you only ever include this mixin once!**
+// **Only ever include this mixin ONCE!**
 @include mat-core();
 
+// Themes
+// ------
+// set default theme for angular material otherwise we get some warnings
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+// Set indigo-pink theme.
+$indigo-pink-primary: mat-palette($mat-indigo);
+$indigo-pink-accent:  mat-palette($mat-pink, A200, A100, A400);
+$indigo-pink-theme:   mat-light-theme($indigo-pink-primary, $indigo-pink-accent);
+// Set deep-purple-amber theme.
+$deep-purple-amber-primary: mat-palette($mat-deep-purple);
+$deep-purple-amber-accent:  mat-palette($mat-amber, A200, A100, A400);
+$deep-purple-amber-theme:   mat-light-theme($deep-purple-amber-primary, $deep-purple-amber-accent);
+// Set pink-blue-grey theme.
+$pink-blue-grey-primary: mat-palette($mat-pink);
+$pink-blue-grey-accent:  mat-palette($mat-blue-grey, A200, A100, A400);
+$pink-blue-grey-theme:   mat-dark-theme($pink-blue-grey-primary, $pink-blue-grey-accent);
+// Set purple-green theme.
+$purple-green-primary: mat-palette($mat-purple);
+$purple-green-accent:  mat-palette($mat-green, A200, A100, A400);
+$purple-green-theme:   mat-dark-theme($purple-green-primary, $purple-green-accent);
 
-// Import indigo-pink theme (that will be our default).
-@import './assets/custom-themes/indigo-pink.scss';
 
-// Import deep-purple-amber theme.
-@import './assets/custom-themes/deep-purple-amber.scss';
+// Components
+// ----------
+@import './app/navigation/pages-nav/pages-nave.component.theme.scss';
+// you only have to add additional componenets here (instead of in every theme class)
+@mixin custom-components-theme($theme) {
+  @include pages-nav-component-theme($theme);
+}
 
-// Import pink-blue-grey theme.
-@import './assets/custom-themes/pink-blue-grey.scss';
-
-// Import pink-blue-grey theme.
-@import './assets/custom-themes/purple-green.scss';
+// Class
+// -----
+// Include the alternative theme styles inside of a block with a CSS class.
+.indigo-pink-theme {
+  @include angular-material-theme($indigo-pink-theme);
+  @include custom-components-theme($indigo-pink-theme);
+}
+.deep-purple-amber-theme {
+  @include angular-material-theme($deep-purple-amber-theme);
+  @include custom-components-theme($deep-purple-amber-theme);
+}
+.pink-blue-grey-theme {
+  @include angular-material-theme($pink-blue-grey-theme);
+  @include custom-components-theme($pink-blue-grey-theme);
+}
+.purple-green-theme {
+  @include angular-material-theme($purple-green-theme);
+  @include custom-components-theme($purple-green-theme);
+}
 
 html, body {
   font-family: Roboto, Arial, sans-serif;

@@ -3,7 +3,3 @@ $indigo-pink-primary: mat-palette($mat-indigo);
 $indigo-pink-accent:  mat-palette($mat-pink, A200, A100, A400);
 $indigo-pink-theme:   mat-light-theme($indigo-pink-primary, $indigo-pink-accent);
 
-// Include the default theme styles.
-.indigo-pink-theme {
-  @include angular-material-theme($indigo-pink-theme);  
-} 

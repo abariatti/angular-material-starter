@@ -1,7 +1,7 @@
-import { ThemePickerService } from './shared/theme-picker/theme-picker.service';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { TranslateService } from '@ngx-translate/core';
+import { ThemePickerService } from './navigation/theme-picker/theme-picker.service';
 
 @Component({
   selector: 'app-root',

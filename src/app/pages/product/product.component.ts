@@ -1,4 +1,4 @@
-import { Product } from './../../models/products';
+import { Product } from '../../models/products';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';

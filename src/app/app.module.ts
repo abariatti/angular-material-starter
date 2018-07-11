@@ -1,4 +1,4 @@
-import { PagesNavComponent } from './pages/pages-nav.component';
+import { PagesNavComponent } from './navigation/pages-nav/pages-nav.component';
 import { ParseInterceptor } from './helpers/parse.interceptor';
 import { ProductService } from './services/product.service';
 import { LoginComponent } from './login/login.component';
@@ -10,7 +10,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppMaterialModule } from './shared/app-material/app-material.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -24,7 +23,8 @@ import { AuthenticationService } from './services/authentication.service';
 import { ProductComponent } from './pages/product/product.component';
 import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
 import { DynamicFormsCoreModule } from '@ng-dynamic-forms/core';
-import { ThemePickerModule } from './shared/theme-picker';
+import { AppMaterialModule } from './modules/app-material/app-material.module';
+import { ThemePickerModule } from './navigation/theme-picker';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {

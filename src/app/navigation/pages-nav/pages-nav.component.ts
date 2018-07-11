@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
+import { ThemePickerService } from '../theme-picker/theme-picker.service';
 
 @Component({
   selector: 'app-pages-nav',
@@ -6,9 +7,12 @@ import { Component, ElementRef, OnInit } from '@angular/core';
   styleUrls: ['./pages-nav.component.scss']
 })
 export class PagesNavComponent implements OnInit {
-  constructor(
+  public isDarkTheme = false;
 
-  ) {
+  constructor(private themePickerService: ThemePickerService) {
+    this.themePickerService.theme$.subscribe(t => {
+      this.isDarkTheme = t.isDark;
+    });
   }
 
   ngOnInit() {

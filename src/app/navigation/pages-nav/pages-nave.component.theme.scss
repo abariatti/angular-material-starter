@@ -1,0 +1,43 @@
+@import '~@angular/material/theming';
+
+// mixin name will be used in main style.scss
+@mixin pages-nav-component-theme($theme) {
+
+  // retrieve variables from theme
+  // (all possible variables, use only what you really need)
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  // all of these variables contain many additional variables
+
+  app-pages-nav {
+
+    .mat-expansion-panel {
+
+      box-shadow: none;
+      .mat-expansion-panel-body {
+        padding: 0px;
+      }
+
+      // retrieve particular color from variable, rg: text, base, divider, ...
+      // color: mat-color($foreground, text);
+
+      // or use "default" subvariable by default, oh the puns :)
+      // border: 1px solid mat-color($accent);
+    }
+
+    .mat-expansion-panel.mat-expanded {
+      background-color: mat-color($background, hover);
+    }
+  }
+
+  mat-list-item.active {
+    background:  mat-color($background, card);
+  }
+}
+
+
+

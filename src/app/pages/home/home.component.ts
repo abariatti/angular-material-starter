@@ -1,5 +1,5 @@
-import { AuthenticationService } from './../../services/authentication.service';
-import { AlertService } from './../../services/alert.service';
+import { AuthenticationService } from '../../services/authentication.service';
+import { AlertService } from '../../services/alert.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 
