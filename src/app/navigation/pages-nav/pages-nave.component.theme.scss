@@ -32,11 +32,13 @@
     .mat-expansion-panel.mat-expanded {
       background-color: mat-color($background, hover);
     }
+
+    .mat-list-item.active {
+      background:  mat-color($background, selected-button);
+    }
   }
 
-  mat-list-item.active {
-    background:  mat-color($background, card);
-  }
+
 }
 
 
