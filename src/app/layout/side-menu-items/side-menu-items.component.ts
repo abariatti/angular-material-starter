@@ -5,11 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './side-menu-items.component.html',
   styleUrls: ['./side-menu-items.component.scss']
 })
-export class SideMenuItemsComponent implements OnInit {
+export class SideMenuItemsComponent {
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }

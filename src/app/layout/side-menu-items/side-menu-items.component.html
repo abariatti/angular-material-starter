@@ -20,14 +20,11 @@
       <span>Profile with guard</span>
     </mat-list-item>
 
-    <mat-expansion-panel class="app-naviation-expansion-panel active" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel class="app-naviation-expansion-panel" >
       <mat-expansion-panel-header expandedHeight="48px">
         <mat-panel-title>
           Expansible menu
         </mat-panel-title>
-        <mat-panel-description>
-          Currently I am {{panelOpenState ? 'open' : 'closed'}}
-        </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-list-item routerLink="/another" routerLinkActive="active">
         <mat-icon>help</mat-icon>
