@@ -2,48 +2,44 @@ import { DynamicFormExampleService } from './dynamic-form-example.service';
 import { Component, OnInit, AfterViewInit, DoCheck, ChangeDetectorRef, IterableDiffers } from '@angular/core';
 import { DynamicFormService, DynamicFormControlModel } from '@ng-dynamic-forms/core';
 import { FormGroup } from '@angular/forms';
+import { MATERIAL_SAMPLE_FORM_MODEL } from './material-sample-form-model';
 
 @Component({
   selector: 'app-dynamic-form-example',
   templateUrl: './dynamic-form-example.component.html',
   styleUrls: ['./dynamic-form-example.component.scss']
 })
-export class DynamicFormExampleComponent implements OnInit, AfterViewInit, DoCheck {
+export class DynamicFormExampleComponent implements OnInit {
 
-  formModel: DynamicFormControlModel[];
+  formModel: DynamicFormControlModel[] = MATERIAL_SAMPLE_FORM_MODEL;
   formGroup: FormGroup;
-
-  private differ: any;
 
   constructor(
     private dynamicFormService: DynamicFormService,
-    private dynamicFormExampleService: DynamicFormExampleService,
-    private changeDetectorRef: ChangeDetectorRef,
-    private differs: IterableDiffers
-  ) {
-    this.differ = differs.find([]).create(null);
-    this.formModel = this.dynamicFormExampleService.getForm();
+    private dynamicFormExampleService: DynamicFormExampleService
+  ) { }
+
+  ngOnInit() {
     this.formGroup = this.dynamicFormService.createFormGroup(this.formModel);
   }
 
-  ngOnInit() {
-
+  onBlur($event) {
+    console.log(`Material blur event on: ${$event.model.id}: `, $event);
   }
 
-  ngAfterViewInit() {
-
+  onChange($event) {
+      console.log(`Material change event on: ${$event.model.id}: `, $event);
   }
 
-  ngDoCheck() {
-    const change = this.differ.diff(this.formModel);
-    if (change) {
-      this.formGroup = this.dynamicFormService.createFormGroup(this.formModel);
-      this.changeDetectorRef.detectChanges();
-    }
+  onFocus($event) {
+      console.log(`Material focus event on: ${$event.model.id}: `, $event);
+  }
+
+  onMatEvent($event) {
+      console.log(`Material ${$event.type} event on: ${$event.model.id}: `, $event);
   }
 
   onSubmit() {
-    console.log(this.formModel);
-    console.log(this.formGroup);
+    console.log(this.formGroup.value);
   }
 }

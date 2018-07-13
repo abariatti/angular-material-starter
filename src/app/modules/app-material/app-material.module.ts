@@ -19,7 +19,9 @@ import { MatButtonModule,
          MatTableModule,
          MatPaginatorModule,
          MatSortModule,
-         MatExpansionModule } from '@angular/material';
+         MatExpansionModule,
+         MatNativeDateModule,
+         MatDatepickerModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -44,7 +46,9 @@ import { MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatNativeDateModule,
+    MatDatepickerModule
   ]
 })
 export class AppMaterialModule { }
