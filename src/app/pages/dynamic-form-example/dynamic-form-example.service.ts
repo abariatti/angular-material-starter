@@ -20,13 +20,14 @@ export class DynamicFormExampleService {
         id: 'sampleInput',
         label: 'Sample Input',
         maxLength: 42,
-        placeholder: 'Sample input'
+        placeholder: 'Sample input',
+        required: true
       }),
 
       new DynamicRadioGroupModel<string>({
 
         id: 'sampleRadioGroup',
-        label: 'Sample Radio Group',
+        label: 'Sample Radio Group: ',
         options: [
           {
             label: 'Option 1',
