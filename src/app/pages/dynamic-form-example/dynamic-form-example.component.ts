@@ -20,7 +20,8 @@ export class DynamicFormExampleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.formGroup = this.dynamicFormService.createFormGroup(this.formModel);
+    this.formGroup = this.dynamicFormService
+      .createFormGroup(this.dynamicFormExampleService.getForm());
   }
 
   onBlur($event) {
