@@ -21,11 +21,11 @@ export class FakeUserBackendInterceptor implements HttpInterceptor {
     // wrap in delayed observable to simulate server api call
     return Observable.of(null).mergeMap(() => {
 
-      // authenticate
-      if (request.url.endsWith('/api/authenticate') && request.method === 'POST') {
+      // login
+      if (request.url.endsWith('/parse/login') && request.method === 'GET') {
         // find if any user matches login credentials
         const filteredUsers = users.filter(user => {
-          return user.email === request.body.email && user.password === request.body.password;
+          return user.username === request.params.get('username') && user.password === request.params.get('password');
         });
 
         if (filteredUsers.length) {
@@ -36,7 +36,7 @@ export class FakeUserBackendInterceptor implements HttpInterceptor {
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
-            token: 'fake-jwt-token'
+            sessionToken: 'fake-jwt-token'
           };
 
           return Observable.of(new HttpResponse({ status: 200, body: body }));
@@ -46,28 +46,11 @@ export class FakeUserBackendInterceptor implements HttpInterceptor {
         }
       }
 
-      // get users
-      if (request.url.endsWith('/api/users') && request.method === 'GET') {
-        // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-        if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-          return Observable.of(new HttpResponse({ status: 200, body: users }));
-        } else {
-          // return 401 not authorised if token is null or invalid
-          return Observable.throw('Unauthorised');
-        }
-      }
-
-      // get user by id
-      if (request.url.match(/\/api\/users\/\d+$/) && request.method === 'GET') {
+      // me
+      if (request.url.endsWith('/parse/users/me') && request.method === 'GET') {
         // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-        if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-          // find user by id in users array
-          const urlParts = request.url.split('/');
-          const id = parseInt(urlParts[urlParts.length - 1], 10);
-          const matchedUsers = users.filter(u => { return u.id === id; });
-          const user = matchedUsers.length ? matchedUsers[0] : null;
-
-          return Observable.of(new HttpResponse({ status: 200, body: user }));
+        if (request.headers.get('x-parse-session-token') === 'fake-jwt-token') {
+          return Observable.of(new HttpResponse({ status: 200, body: {} }));
         } else {
           // return 401 not authorised if token is null or invalid
           return Observable.throw('Unauthorised');
@@ -75,12 +58,12 @@ export class FakeUserBackendInterceptor implements HttpInterceptor {
       }
 
       // create user
-      if (request.url.endsWith('/api/users') && request.method === 'POST') {
+      if (request.url.endsWith('/parse/users') && request.method === 'POST') {
         // get new user object from post body
-        const newUser = request.body;
-
+        const newUser: User = request.body;
+        newUser.isAdmin = false;
         // validation
-        const duplicateUser = users.filter(user => { return user.email === newUser.email; }).length;
+        const duplicateUser = users.filter(user => user.username === newUser.username).length;
         if (duplicateUser) {
           return Observable.throw('Username "' + newUser.email + '" is already taken');
         }
@@ -128,7 +111,8 @@ export class FakeUserBackendInterceptor implements HttpInterceptor {
 
     })
 
-      // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
+      // call materialize and dematerialize to ensure delay even if an error is thrown
+      // (https://github.com/Reactive-Extensions/RxJS/issues/648)
       .materialize()
       .delay(500)
       .dematerialize();
