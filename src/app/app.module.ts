@@ -1,4 +1,4 @@
-import { fakeBackendProvider } from './helpers/fake-backend.provider';
+import { fakeParseBackendProvider } from './helpers/fake-parse-backend.provider';
 import { ParseInterceptor } from './helpers/parse.interceptor';
 import { ProductService } from './services/product.service';
 import { LoginComponent } from './login/login.component';
@@ -84,7 +84,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       useValue: customDateRangeValidator,
       multi: true
     },
-    fakeBackendProvider // fake user backend interceptor
+    fakeParseBackendProvider // fake user backend interceptor
   ],
   bootstrap: [AppComponent]
 })

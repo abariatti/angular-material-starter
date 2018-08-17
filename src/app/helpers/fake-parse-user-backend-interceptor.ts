@@ -10,7 +10,7 @@ import 'rxjs/add/operator/dematerialize';
 import { User } from '../models/user';
 
 @Injectable()
-export class FakeUserBackendInterceptor implements HttpInterceptor {
+export class FakeParseUserBackendInterceptor implements HttpInterceptor {
 
   constructor() { }
 
@@ -82,34 +82,11 @@ export class FakeUserBackendInterceptor implements HttpInterceptor {
         return Observable.of(new HttpResponse({ status: 200 }));
       }
 
-      // delete user
-      if (request.url.match(/\/api\/users\/\d+$/) && request.method === 'DELETE') {
-        // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-        if (request.headers.get('Authorization').startsWith('fake-jwt-token-for:')) {
-          // find user by id in users array
-          let found = false;
-          const urlParts = request.url.split('/');
-          const id = parseInt(urlParts[urlParts.length - 1], 10);
-          for (let i = 0; i < users.length; i++) {
-            const user = users[i];
-            if (user.id === id) {
-              // delete user
-              users.splice(i, 1);
-              localStorage.setItem('users', JSON.stringify(users));
-              found = true;
-              break;
-            }
-          }
-          if (!found) {
-            return Observable.throw('Unknown user id: ' + id);
-          }
-          // respond 200 OK
-          return Observable.of(new HttpResponse({ status: 200 }));
-        } else {
-          // return 401 not authorised if token is null or invalid
-          return Observable.throw('Unauthorised');
-        }
+       // GET Products
+       if (request.url.endsWith('/parse/classes/products') && request.method === 'GET') {
+
       }
+
 
       // pass through any requests not handled above
       return next.handle(request);
