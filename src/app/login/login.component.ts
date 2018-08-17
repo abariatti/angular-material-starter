@@ -1,6 +1,5 @@
-﻿import { RegisterModel } from './../models/register-model';
-import { LoginModel } from './../models/login-model';
-import { User } from '../models/user';
+﻿import { Register } from './../models/register';
+import { Login } from './../models/login';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
@@ -14,8 +13,8 @@ import { NgForm, FormGroup, FormControlName } from '@angular/forms';
 })
 
 export class LoginComponent implements OnInit {
-  loginModel: LoginModel = new LoginModel();
-  registerModel: RegisterModel = new RegisterModel();
+  loginModel: Login = new Login();
+  registerModel: Register = new Register();
   loading = false;
   returnUrl: string;
   selectedIndex: Number = 0;
@@ -30,7 +29,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     // reset login status
     this.authenticationService.logout();
-
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
@@ -45,7 +43,6 @@ export class LoginComponent implements OnInit {
   }
 
   register(fregister: NgForm) {
-    console.log(fregister);
     this.loading = true;
     this.registerModel.username = this.registerModel.email;
     this.authenticationService.register(this.registerModel)

@@ -15,7 +15,8 @@
   </button>
 
   <mat-menu #profileMenu x-position="after">
-    <button routerLink="/profile" mat-menu-item>Profile</button>
+    <button routerLink="/profile" mat-menu-item>{{ user.name }}'s profile</button>
+    <button routerLink="/login" mat-menu-item>logout</button>
   </mat-menu>
 
 </mat-toolbar>

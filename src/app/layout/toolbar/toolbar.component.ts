@@ -1,4 +1,6 @@
+import { AuthenticationService } from './../../services/authentication.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-toolbar',
@@ -8,8 +10,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class ToolbarComponent {
 
   @Output() menuClicked = new EventEmitter<void>();
+  public user: User;
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) {
+    authenticationService.me().subscribe(u => this.user = u);
+  }
 
   clickMenu() {
     this.menuClicked.emit();
