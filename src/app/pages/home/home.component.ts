@@ -9,7 +9,7 @@ import { User } from '../../models/user';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  currentUser: any;
+  currentUser: User;
 
   constructor(private authenticationService: AuthenticationService) { }
 

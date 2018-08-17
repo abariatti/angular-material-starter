@@ -1,4 +1,6 @@
-﻿import { User } from '../models/user';
+﻿import { RegisterModel } from './../models/register-model';
+import { LoginModel } from './../models/login-model';
+import { User } from '../models/user';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
@@ -12,8 +14,8 @@ import { NgForm, FormGroup, FormControlName } from '@angular/forms';
 })
 
 export class LoginComponent implements OnInit {
-  loginModel: any = {};
-  registerModel: any = {};
+  loginModel: LoginModel = new LoginModel();
+  registerModel: RegisterModel = new RegisterModel();
   loading = false;
   returnUrl: string;
   selectedIndex: Number = 0;
@@ -45,11 +47,12 @@ export class LoginComponent implements OnInit {
   register(fregister: NgForm) {
     console.log(fregister);
     this.loading = true;
+    this.registerModel.username = this.registerModel.email;
     this.authenticationService.register(this.registerModel)
       .subscribe(
         data => {
           this.alertService.success('Registration successful', true);
-          this.loginModel.email = this.registerModel.email;
+          this.loginModel.username = this.registerModel.email;
           this.selectedIndex = 0;
           fregister.resetForm();
         });

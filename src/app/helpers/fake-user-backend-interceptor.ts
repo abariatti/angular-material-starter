@@ -36,7 +36,7 @@ export class FakeUserBackendInterceptor implements HttpInterceptor {
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
-            sessionToken: 'fake-jwt-token'
+            sessionToken: 'fake-jwt-token-for:' + user.id
           };
 
           return Observable.of(new HttpResponse({ status: 200, body: body }));
@@ -49,8 +49,13 @@ export class FakeUserBackendInterceptor implements HttpInterceptor {
       // me
       if (request.url.endsWith('/parse/users/me') && request.method === 'GET') {
         // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-        if (request.headers.get('x-parse-session-token') === 'fake-jwt-token') {
-          return Observable.of(new HttpResponse({ status: 200, body: {} }));
+        if (request.headers.get('x-parse-session-token').startsWith('fake-jwt-token-for:')) {
+          // retrieve user id in the token
+          const userId = parseInt(request.headers.get('x-parse-session-token').split(':')[1], 10);
+          // retrieve user from cache
+          const user = users.find(u => u.id === userId);
+
+          return Observable.of(new HttpResponse({ status: 200, body: user }));
         } else {
           // return 401 not authorised if token is null or invalid
           return Observable.throw('Unauthorised');
@@ -65,7 +70,7 @@ export class FakeUserBackendInterceptor implements HttpInterceptor {
         // validation
         const duplicateUser = users.filter(user => user.username === newUser.username).length;
         if (duplicateUser) {
-          return Observable.throw('Username "' + newUser.email + '" is already taken');
+          return Observable.throw('Username "' + newUser.username + '" is already taken');
         }
 
         // save new user
@@ -80,7 +85,7 @@ export class FakeUserBackendInterceptor implements HttpInterceptor {
       // delete user
       if (request.url.match(/\/api\/users\/\d+$/) && request.method === 'DELETE') {
         // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-        if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+        if (request.headers.get('Authorization').startsWith('fake-jwt-token-for:')) {
           // find user by id in users array
           let found = false;
           const urlParts = request.url.split('/');

@@ -29,8 +29,8 @@
                 <mat-error *ngIf="name.invalid">Name is required</mat-error>
               </mat-form-field>
               <mat-form-field>
-                <input matInput [(ngModel)]="registerModel.username" email required #username="ngModel" name="username" placeholder="Enter your email">
-                <mat-error *ngIf="username.invalid">Email is invalid</mat-error>
+                <input matInput [(ngModel)]="registerModel.email" email required #email="ngModel" name="email" placeholder="Enter your email">
+                <mat-error *ngIf="email.invalid">Email is invalid</mat-error>
               </mat-form-field>
               <mat-form-field>
                 <textarea matInput [(ngModel)]="registerModel.details" #details="ngModel" name="details" placeholder="Any bio!?" matTextareaAutosize

@@ -32,7 +32,7 @@ export class AuthenticationService {
     this.http.post<any>('/parse/logout', {});
   }
 
-  me(): Observable<any> {
+  me(): Observable<User> {
     // best version we return cached but in the same time we check with our backend
     if (!JSON.parse(localStorage.getItem('currentUser'))) {
       // we dont have a current user it ends here
