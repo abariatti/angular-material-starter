@@ -1,12 +1,11 @@
-﻿import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+﻿import { catchError } from 'rxjs/operators/catchError';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/merge';
-import { map, flatMap, switchMap, merge } from 'rxjs/operators';
+import { map, merge } from 'rxjs/operators';
 import { User } from '../models/user';
+import { of } from 'rxjs';
+
 
 @Injectable()
 export class AuthenticationService {
@@ -15,7 +14,7 @@ export class AuthenticationService {
 
   login(username: string, password: string) {
     return this.http.get<any>('/parse/login', { params: { username: username, password: password } })
-      .map(user => {
+      .pipe(map(user => {
         // login successful if there's a jwt token in the response
         if (user && user.sessionToken) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -23,7 +22,7 @@ export class AuthenticationService {
         }
 
         return user;
-      });
+      }));
   }
 
   logout() {
@@ -36,20 +35,20 @@ export class AuthenticationService {
     // best version we return cached but in the same time we check with our backend
     if (!JSON.parse(localStorage.getItem('currentUser'))) {
       // we dont have a current user it ends here
-      return Observable.of(undefined);
+      return of(undefined);
     }
     // we have a current user so we return it first
     // so it is immediately displayed
-    return Observable.of(JSON.parse(localStorage.getItem('currentUser')))
+    return of(JSON.parse(localStorage.getItem('currentUser')))
       // ... but our user might not be authenticated anymore
       // so we check with our backend if we have it we just
       // update it (send a new value to our observable)
-      .pipe(merge(this.http.get('/parse/users/me').catch(err => {
+      .pipe(merge(this.http.get('/parse/users/me').pipe(catchError(err => {
         // in this case our user is not authenticated anymore
         // we remove it from local storage and reset our cache
         this.removeLocalUser();
-        return Observable.of(undefined);
-      })));
+        return of(undefined);
+      }))));
 
     // simple version
     // return this.http.get('/parse/users/me');

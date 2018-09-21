@@ -10,12 +10,12 @@
 
   <app-theme-picker></app-theme-picker>
 
-  <button mat-icon-button [matMenuTriggerFor]="profileMenu">
+  <button mat-icon-button [matMenuTriggerFor]="profileMenu" *ngIf="user">
     <mat-icon>account_circle</mat-icon>
   </button>
 
   <mat-menu #profileMenu x-position="after">
-    <button routerLink="/profile" mat-menu-item>{{ user.name }}'s profile</button>
+    <button routerLink="/profile" mat-menu-item>{{ user?.name }}'s profile</button>
     <button routerLink="/login" mat-menu-item>logout</button>
   </mat-menu>
 

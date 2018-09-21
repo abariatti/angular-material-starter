@@ -8,6 +8,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/materialize';
 import 'rxjs/add/operator/dematerialize';
 import { User } from '../models/user';
+import { of } from 'rxjs';
 
 @Injectable()
 export class FakeParseUserBackendInterceptor implements HttpInterceptor {
@@ -19,7 +20,7 @@ export class FakeParseUserBackendInterceptor implements HttpInterceptor {
     const users: User[] = JSON.parse(localStorage.getItem('users')) || [];
 
     // wrap in delayed observable to simulate server api call
-    return Observable.of(null).mergeMap(() => {
+    return of(null).mergeMap(() => {
 
       // login
       if (request.url.endsWith('/parse/login') && request.method === 'GET') {
@@ -39,7 +40,7 @@ export class FakeParseUserBackendInterceptor implements HttpInterceptor {
             sessionToken: 'fake-jwt-token-for:' + user.id
           };
 
-          return Observable.of(new HttpResponse({ status: 200, body: body }));
+          return of(new HttpResponse({ status: 200, body: body }));
         } else {
           // else return 400 bad request
           return Observable.throw('Username or password is incorrect');
@@ -55,7 +56,7 @@ export class FakeParseUserBackendInterceptor implements HttpInterceptor {
           // retrieve user from cache
           const user = users.find(u => u.id === userId);
 
-          return Observable.of(new HttpResponse({ status: 200, body: user }));
+          return of(new HttpResponse({ status: 200, body: user }));
         } else {
           // return 401 not authorised if token is null or invalid
           return Observable.throw('Unauthorised');
@@ -79,7 +80,7 @@ export class FakeParseUserBackendInterceptor implements HttpInterceptor {
         localStorage.setItem('users', JSON.stringify(users));
 
         // respond 200 OK
-        return Observable.of(new HttpResponse({ status: 200 }));
+        return of(new HttpResponse({ status: 200 }));
       }
 
        // GET Products
