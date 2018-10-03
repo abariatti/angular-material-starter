@@ -20,8 +20,6 @@ import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common
 import { AlertService } from './services/alert.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthenticationService } from './services/authentication.service';
-import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
-import { DynamicFormsCoreModule } from '@ng-dynamic-forms/core';
 import { AppMaterialModule } from './modules/app-material/app-material.module';
 import { PagesNavComponent } from './layout/pages-nav/pages-nav.component';
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
@@ -55,8 +53,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    DynamicFormsCoreModule.forRoot(),
-    DynamicFormsMaterialUIModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     FormsModule,
     ReactiveFormsModule,
