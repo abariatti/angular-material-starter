@@ -18,7 +18,8 @@ const routes: Routes = [
       { path: 'about', component: AboutComponent },
       { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
       { path: 'products', loadChildren: './modules/product/product.module#ProductModule' },
-      { path: 'dynamic-form-example', loadChildren: './modules/dynamic-form-example/dynamic-form-example.module#DynamicFormExampleModule' }
+      { path: 'dynamic-form-example', loadChildren: './modules/dynamic-form-example/dynamic-form-example.module#DynamicFormExampleModule' },
+      { path: 'qr', loadChildren: './modules/qr-scanner/qr-scanner.module#QrScannerModule' }
     ]
   },
   { path: 'login', component: LoginComponent },

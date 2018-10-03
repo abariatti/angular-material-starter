@@ -41,7 +41,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProfileComponent,
     AboutComponent,
     ToolbarComponent,
-    SideMenuItemsComponent,
+    SideMenuItemsComponent
   ],
   imports: [
     BrowserModule,
