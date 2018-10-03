@@ -1,14 +1,8 @@
 import { Product } from '../../models/products';
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {Observable} from 'rxjs/Observable';
-import {merge} from 'rxjs/observable/merge';
-import {of as observableOf} from 'rxjs/observable/of';
-import {catchError} from 'rxjs/operators/catchError';
-import {map} from 'rxjs/operators/map';
-import {startWith} from 'rxjs/operators/startWith';
-import {switchMap} from 'rxjs/operators/switchMap';
+import { Component, OnInit} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { MatTableDataSource } from '@angular/material';
+import { Observable } from 'rxjs/Observable';
 import { ProductService } from '../../services/product.service';
 import 'rxjs/add/operator/takeWhile';
 
@@ -42,8 +36,8 @@ export class ProductComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
 

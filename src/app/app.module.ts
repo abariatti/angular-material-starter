@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { FormsModule, ReactiveFormsModule, NG_VALIDATORS, NG_ASYNC_VALIDATORS, Validator } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, NG_VALIDATORS } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,15 +20,14 @@ import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common
 import { AlertService } from './services/alert.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthenticationService } from './services/authentication.service';
-import { ProductComponent } from './pages/product/product.component';
 import { DynamicFormsMaterialUIModule } from '@ng-dynamic-forms/ui-material';
-import { DynamicFormsCoreModule, DYNAMIC_VALIDATORS, ValidatorFactory } from '@ng-dynamic-forms/core';
+import { DynamicFormsCoreModule } from '@ng-dynamic-forms/core';
 import { AppMaterialModule } from './modules/app-material/app-material.module';
 import { PagesNavComponent } from './layout/pages-nav/pages-nav.component';
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 import { SideMenuItemsComponent } from './layout/side-menu-items/side-menu-items.component';
 import { ThemePickerModule } from './layout/theme-picker';
-import { customValidator, customDateRangeValidator, customAsyncFormGroupValidator, customForbiddenValidator } from './app.validators';
+import { customDateRangeValidator } from './app.validators';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -43,7 +42,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     HomeComponent,
     ProfileComponent,
     AboutComponent,
-    ProductComponent,
     ToolbarComponent,
     SideMenuItemsComponent,
   ],
@@ -73,18 +71,20 @@ export function HttpLoaderFactory(http: HttpClient) {
     AlertService,
     AuthenticationService,
     ProductService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ParseInterceptor,
-      multi: true
-    },
     // Dynamic Forms Module Validators
     {
       provide: NG_VALIDATORS,
       useValue: customDateRangeValidator,
       multi: true
     },
-    fakeParseBackendProvider // fake user backend interceptor
+    // interceptors for faking api
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ParseInterceptor,
+      multi: true
+    },
+    // fake user backend interceptor
+    fakeParseBackendProvider
   ],
   bootstrap: [AppComponent]
 })
