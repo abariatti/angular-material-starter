@@ -5,10 +5,12 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "surge": "node_modules/.bin/surge ./dist/angular-material-starter/ https://angular-material-starter.surge.sh"
+    "surge": "node_modules/.bin/surge ./dist/angular-material-starter/ https://angular-material-starter.surge.sh",
+    "deploy": "npm run build:prod & npm run surge"
   },
   "private": true,
   "dependencies": {
