@@ -1,6 +1,6 @@
 {
-  "name": "ng6",
-  "short_name": "ng6",
+  "name": "angular-material-starter",
+  "short_name": "angular-material-starter",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
