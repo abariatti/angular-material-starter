@@ -4,4 +4,5 @@ export class Register {
   public email: string;
   public name: string;
   public isAdmin: boolean;
+  public details: string;
 }
