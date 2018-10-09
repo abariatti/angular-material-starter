@@ -1,6 +1,9 @@
+import { QRScannerData } from './qr-scanner-data.model';
 import { Component, VERSION, OnInit, ViewChild } from '@angular/core';
 import { Result } from '@zxing/library';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
+import { MatDialog } from '@angular/material';
+import { QrScannerOptionDialogComponent } from './qr-scanner-option-dialog.component';
 
 @Component({
   selector: 'app-qr-scanner',
@@ -8,36 +11,32 @@ import { ZXingScannerComponent } from '@zxing/ngx-scanner';
   styleUrls: ['./qr-scanner.component.scss']
 })
 export class QrScannerComponent implements OnInit {
+  constructor(public dialog: MatDialog) {}
 
   public ngVersion = VERSION.full;
 
   @ViewChild('scanner')
   public scanner: ZXingScannerComponent;
 
-  public hasPermission: boolean;
-  public hasDevices: boolean;
-  public qrResultString: string;
-  public qrResult: Result;
-  public availableDevices: MediaDeviceInfo[];
-  public currentDevice: MediaDeviceInfo;
+  private qrScannerData: QRScannerData = new QRScannerData();
 
   public ngOnInit(): void {
     this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => this.chooseDevice(devices));
-    this.scanner.hasDevices.subscribe((has: boolean) => this.hasDevices = has);
-    this.scanner.scanComplete.subscribe((result: Result) => this.qrResult = result);
-    this.scanner.permissionResponse.subscribe((perm: boolean) => this.hasPermission = perm);
+    this.scanner.hasDevices.subscribe((has: boolean) => this.qrScannerData.hasDevices = has);
+    this.scanner.scanComplete.subscribe((result: Result) => this.qrScannerData.qrResult = result);
+    this.scanner.permissionResponse.subscribe((perm: boolean) => this.qrScannerData.hasPermission = perm);
   }
 
   public displayCameras(cameras: MediaDeviceInfo[]): void {
-    this.availableDevices = cameras;
+    this.qrScannerData.availableDevices = cameras;
   }
 
   public handleQrCodeResult(resultString: string): void {
-    this.qrResultString = resultString;
+    this.qrScannerData.qrResultString = resultString;
   }
 
   public onDeviceSelectChange(selectedValue: string): void {
-    this.currentDevice = this.scanner.getDeviceById(selectedValue);
+    this.qrScannerData.currentDevice = this.scanner.getDeviceById(selectedValue);
   }
 
   public stateToEmoji(state: boolean): string {
@@ -56,21 +55,36 @@ export class QrScannerComponent implements OnInit {
     return states['' + state];
   }
 
+  public openDialog(): void {
+    const dialogRef = this.dialog.open(QrScannerOptionDialogComponent, {
+      width: '250px',
+      data: this.qrScannerData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.qrScannerData = result;
+      this.setDevice(this.qrScannerData.currentDevice);
+    });
+  }
+
   private chooseDevice(devices: MediaDeviceInfo[]): void {
-    this.availableDevices = devices;
+    this.qrScannerData.availableDevices = devices;
     // selects the device's back camera by default
     for (const device of devices) {
       if (/back|rear|environment/gi.test(device.label)) {
-        this.scanner.changeDevice(device);
-        this.currentDevice = device;
+        this.setDevice(device);
         break;
       }
     }
     // no back device selected taking first available
-    if (!this.currentDevice && devices.length > 0) {
-      this.scanner.changeDevice(devices[0]);
-      this.currentDevice = devices[0];
+    if (!this.qrScannerData.currentDevice && devices.length > 0) {
+      this.setDevice(devices[0]);
     }
+  }
+
+  private setDevice(device: MediaDeviceInfo): void {
+    this.scanner.changeDevice(device);
+    this.qrScannerData.currentDevice = device;
   }
 
 }

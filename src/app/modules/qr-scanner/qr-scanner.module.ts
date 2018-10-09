@@ -1,3 +1,4 @@
+import { AppMaterialModule } from './../app-material/app-material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QrScannerComponent } from './qr-scanner.component';
@@ -8,7 +9,8 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
   imports: [
     CommonModule,
     QrScannerRoutingModule,
-    ZXingScannerModule
+    ZXingScannerModule,
+    AppMaterialModule
   ],
   declarations: [QrScannerComponent]
 })
