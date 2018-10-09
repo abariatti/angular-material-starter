@@ -24,21 +24,7 @@ export class QrScannerComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => {
-        this.availableDevices = devices;
-        this.scanner.changeDevice(devices[0]); // take the first available
-        this.currentDevice = devices[0];
-        // // selects the devices's back camera by default
-        // for (const device of devices) {
-        //     if (/back|rear|environment/gi.test(device.label)) {
-        //         this.scanner.changeDevice(device);
-        //         this.currentDevice = device;
-        //         break;
-        //     }
-        // }
-    });
-
-    this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => this.availableDevices = devices);
+    this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => this.chooseDevice(devices));
     this.scanner.hasDevices.subscribe((has: boolean) => this.hasDevices = has);
     this.scanner.scanComplete.subscribe((result: Result) => this.qrResult = result);
     this.scanner.permissionResponse.subscribe((perm: boolean) => this.hasPermission = perm);
@@ -70,6 +56,23 @@ export class QrScannerComponent implements OnInit {
     };
 
     return states['' + state];
+  }
+
+  private chooseDevice(devices: MediaDeviceInfo[]): void {
+    this.availableDevices = devices;
+    // selects the device's back camera by default
+    for (const device of devices) {
+      if (/back|rear|environment/gi.test(device.label)) {
+        this.scanner.changeDevice(device);
+        this.currentDevice = device;
+        break;
+      }
+    }
+    // no back device selected taking first available
+    if (!this.currentDevice && devices.length > 0) {
+      this.scanner.changeDevice(devices[0]);
+      this.currentDevice = devices[0];
+    }
   }
 
 }
