@@ -11,36 +11,36 @@ import { MATERIAL_SAMPLE_FORM_MODEL } from './material-sample-form-model';
 })
 export class DynamicFormExampleComponent implements OnInit {
 
-  formModel: DynamicFormControlModel[] = MATERIAL_SAMPLE_FORM_MODEL;
-  formGroup: FormGroup;
+  public formModel: DynamicFormControlModel[] = MATERIAL_SAMPLE_FORM_MODEL;
+  public formGroup: FormGroup;
 
   constructor(
     private dynamicFormService: DynamicFormService,
     private dynamicFormExampleService: DynamicFormExampleService
   ) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.formGroup = this.dynamicFormService
       .createFormGroup(this.dynamicFormExampleService.getForm());
   }
 
-  onBlur($event) {
-    console.log(`Material blur event on: ${$event.model.id}: `, $event);
+  public onBlur($event): void {
+    console.debug(`Material blur event on: ${$event.model.id}: `, $event);
   }
 
-  onChange($event) {
-      console.log(`Material change event on: ${$event.model.id}: `, $event);
+  public onChange($event): void {
+    console.debug(`Material change event on: ${$event.model.id}: `, $event);
   }
 
-  onFocus($event) {
-      console.log(`Material focus event on: ${$event.model.id}: `, $event);
+  public onFocus($event): void {
+    console.debug(`Material focus event on: ${$event.model.id}: `, $event);
   }
 
-  onMatEvent($event) {
-      console.log(`Material ${$event.type} event on: ${$event.model.id}: `, $event);
+  public onMatEvent($event): void {
+    console.debug(`Material ${$event.type} event on: ${$event.model.id}: `, $event);
   }
 
-  onSubmit() {
-    console.log(this.formGroup.value);
+  public onSubmit(): void {
+    console.debug(this.formGroup.value);
   }
 }

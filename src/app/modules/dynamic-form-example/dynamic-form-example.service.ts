@@ -14,9 +14,7 @@ import {
 @Injectable()
 export class DynamicFormExampleService {
 
-  constructor() { }
-
-  getForm(): DynamicFormControlModel[] {
+  public getForm(): DynamicFormControlModel[] {
     const form: DynamicFormControlModel[] = [
 
       new DynamicFormGroupModel({
@@ -38,7 +36,7 @@ export class DynamicFormExampleService {
               })
           ],
           validators: {
-              customDateRangeValidator: null
+              customDateRangeValidator: undefined
           },
           errorMessages: {
               customDateRangeValidator: 'Invalid period of time selected'
@@ -98,7 +96,7 @@ export class DynamicFormExampleService {
           maxLength: 25,
           placeholder: 'First Name',
           validators: {
-              required: null
+              required: undefined
           },
           errorMessages: {
               required: 'Field is required'
@@ -120,7 +118,7 @@ export class DynamicFormExampleService {
           id: 'email',
           placeholder: 'E-Mail',
           validators: {
-              email: null
+              email: undefined
           },
           errorMessages: {
               email: 'Field has no valid email'
@@ -282,7 +280,6 @@ export class DynamicFormExampleService {
           label: 'I confirm the information given above'
       })
     ];
-
 
     return form;
   }

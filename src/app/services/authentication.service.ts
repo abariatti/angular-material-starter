@@ -6,13 +6,12 @@ import { map, merge } from 'rxjs/operators';
 import { User } from '../models/user';
 import { of } from 'rxjs';
 
-
 @Injectable()
 export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
-  login(username: string, password: string) {
+  public login(username: string, password: string): any {
     return this.http.get<any>('/parse/login', { params: { username: username, password: password } })
       .pipe(map(user => {
         // login successful if there's a jwt token in the response
@@ -25,18 +24,19 @@ export class AuthenticationService {
       }));
   }
 
-  logout() {
+  public logout(): void {
     this.removeLocalUser();
     // call api
     this.http.post<any>('/parse/logout', {});
   }
 
-  me(): Observable<User> {
+  public me(): Observable<User | undefined> {
     // best version we return cached but in the same time we check with our backend
     if (!JSON.parse(localStorage.getItem('currentUser'))) {
       // we dont have a current user it ends here
       return of(undefined);
     }
+
     // we have a current user so we return it first
     // so it is immediately displayed
     return of(JSON.parse(localStorage.getItem('currentUser')))
@@ -47,6 +47,7 @@ export class AuthenticationService {
         // in this case our user is not authenticated anymore
         // we remove it from local storage and reset our cache
         this.removeLocalUser();
+
         return of(undefined);
       }))));
 
@@ -57,11 +58,11 @@ export class AuthenticationService {
     // return Observable.of(this.currentUser);
   }
 
-  register(registerModel: any) {
+  public register(registerModel: any): Observable<any> {
     return this.http.post<any>('/parse/users', registerModel);
   }
 
-  private removeLocalUser() {
+  private removeLocalUser(): void {
     localStorage.removeItem('currentUser');
   }
 }

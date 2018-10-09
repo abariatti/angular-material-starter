@@ -29,7 +29,7 @@ export const MATERIAL_SAMPLE_FORM_MODEL = [
           })
       ],
       validators: {
-          customDateRangeValidator: null
+          customDateRangeValidator: undefined
       },
       errorMessages: {
           customDateRangeValidator: 'Invalid period of time selected'
@@ -89,7 +89,7 @@ export const MATERIAL_SAMPLE_FORM_MODEL = [
       maxLength: 25,
       placeholder: 'First Name',
       validators: {
-          required: null
+          required: undefined
       },
       errorMessages: {
           required: 'Field is required'
@@ -111,7 +111,7 @@ export const MATERIAL_SAMPLE_FORM_MODEL = [
       id: 'email',
       placeholder: 'E-Mail',
       validators: {
-          email: null
+          email: undefined
       },
       errorMessages: {
           email: 'Field has no valid email'

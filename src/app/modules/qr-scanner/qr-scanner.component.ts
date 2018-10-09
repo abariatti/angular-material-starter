@@ -9,40 +9,38 @@ import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 })
 export class QrScannerComponent implements OnInit {
 
-  ngVersion = VERSION.full;
+  public ngVersion = VERSION.full;
 
   @ViewChild('scanner')
-  scanner: ZXingScannerComponent;
+  public scanner: ZXingScannerComponent;
 
-  hasDevices: boolean;
-  hasPermission: boolean;
-  qrResultString: string;
-  qrResult: Result;
+  public hasPermission: boolean;
+  public hasDevices: boolean;
+  public qrResultString: string;
+  public qrResult: Result;
+  public availableDevices: MediaDeviceInfo[];
+  public currentDevice: MediaDeviceInfo;
 
-  availableDevices: MediaDeviceInfo[];
-  currentDevice: MediaDeviceInfo;
-
-  ngOnInit(): void {
-
+  public ngOnInit(): void {
     this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => this.chooseDevice(devices));
     this.scanner.hasDevices.subscribe((has: boolean) => this.hasDevices = has);
     this.scanner.scanComplete.subscribe((result: Result) => this.qrResult = result);
     this.scanner.permissionResponse.subscribe((perm: boolean) => this.hasPermission = perm);
   }
 
-  displayCameras(cameras: MediaDeviceInfo[]) {
+  public displayCameras(cameras: MediaDeviceInfo[]): void {
     this.availableDevices = cameras;
   }
 
-  handleQrCodeResult(resultString: string) {
+  public handleQrCodeResult(resultString: string): void {
     this.qrResultString = resultString;
   }
 
-  onDeviceSelectChange(selectedValue: string) {
+  public onDeviceSelectChange(selectedValue: string): void {
     this.currentDevice = this.scanner.getDeviceById(selectedValue);
   }
 
-  stateToEmoji(state: boolean): string {
+  public stateToEmoji(state: boolean): string {
 
     const states = {
       // not checked

@@ -6,9 +6,6 @@ import { ThemePickerService } from '../theme-picker/theme-picker.service';
   templateUrl: './pages-nav.component.html',
   styleUrls: ['./pages-nav.component.scss']
 })
-export class PagesNavComponent implements OnInit {
+export class PagesNavComponent  {
 
-  ngOnInit() {
-
-  }
 }

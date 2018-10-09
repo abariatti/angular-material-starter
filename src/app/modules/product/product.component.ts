@@ -12,38 +12,40 @@ import 'rxjs/add/operator/takeWhile';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  product: any = {};
-  displayedColumns = ['id', 'name', 'price', 'quantity'];
-  products: Observable<Product[]>;
-  dataSource = new MatTableDataSource();
+  public product: any = {};
+  public displayedColumns = ['id', 'name', 'price', 'quantity'];
+  public products: Observable<Product[]>;
+  public dataSource = new MatTableDataSource();
 
-  resultsLength = 0;
-  isLoadingResults = true;
-  isRateLimitReached = false;
+  public resultsLength = 0;
+  public isLoadingResults = true;
+  public isRateLimitReached = false;
   private alive = true;
 
-  constructor(private http: HttpClient,
-    private productService: ProductService) {}
+  constructor(
+    private http: HttpClient,
+    private productService: ProductService
+    ) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.getProducts();
   }
 
-  private getProducts() {
-    this.productService.getAll().takeWhile(() => this.alive).subscribe(products => {
-      this.dataSource.data = products;
-    });
-  }
-
-  applyFilter(filterValue: string) {
+  public applyFilter(filterValue: string): void {
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
 
-  onSubmit() {
-    console.log(this.product);
+  public onSubmit(): void {
+    alert(this.product);
     this.productService.create(this.product);
     this.getProducts();
+  }
+
+  private getProducts(): void {
+    this.productService.getAll().takeWhile(() => this.alive).subscribe(products => {
+      this.dataSource.data = products;
+    });
   }
 }

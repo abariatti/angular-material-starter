@@ -9,11 +9,11 @@ import { User } from '../../models/user';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  currentUser: User;
+  public currentUser: User;
 
   constructor(private authenticationService: AuthenticationService) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.authenticationService.me().subscribe(user => {
       this.currentUser = user;
     });

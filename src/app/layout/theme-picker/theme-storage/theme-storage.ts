@@ -3,29 +3,27 @@ import { Theme } from '../theme';
 
 @Injectable()
 export class ThemeStorage {
-  static storageKey = 'docs-theme-storage-current';
+  private static storageKey = 'docs-theme-storage-current';
 
-  onThemeUpdate: EventEmitter<Theme> = new EventEmitter<Theme>();
+  public onThemeUpdate: EventEmitter<Theme> = new EventEmitter<Theme>();
 
-  storeTheme(theme: Theme) {
+  public storeTheme(theme: Theme): void {
     try {
       window.localStorage[ThemeStorage.storageKey] = JSON.stringify(theme);
-    } catch (e) { }
-
-    this.onThemeUpdate.emit(theme);
-  }
-
-  getStoredTheme(): Theme {
-    try {
-      return JSON.parse(window.localStorage[ThemeStorage.storageKey] || null);
-    } catch (e) {
-      return null;
+    } finally {
+      this.onThemeUpdate.emit(theme);
     }
   }
 
-  clearStorage() {
+  public getStoredTheme(): Theme {
     try {
-      window.localStorage.removeItem(ThemeStorage.storageKey);
-    } catch (e) { }
+      return JSON.parse(window.localStorage[ThemeStorage.storageKey] || undefined);
+    } catch (e) {
+      return undefined;
+    }
+  }
+
+  public clearStorage(): void {
+    window.localStorage.removeItem(ThemeStorage.storageKey);
   }
 }

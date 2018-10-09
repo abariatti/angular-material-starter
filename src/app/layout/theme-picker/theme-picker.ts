@@ -13,7 +13,6 @@ import {CommonModule} from '@angular/common';
 import { ThemePickerService } from './theme-picker.service';
 import { Theme } from './theme';
 
-
 @Component({
   selector: 'app-theme-picker',
   templateUrl: 'theme-picker.html',
@@ -22,8 +21,8 @@ import { Theme } from './theme';
   encapsulation: ViewEncapsulation.None
 })
 export class ThemePickerComponent {
-  themes: Theme[];
-  currentTheme: Theme;
+  public themes: Theme[];
+  public currentTheme: Theme;
 
   constructor(private themePickerService: ThemePickerService) {
     this.themes = this.themePickerService.themes;
@@ -32,7 +31,7 @@ export class ThemePickerComponent {
     });
   }
 
-  installTheme(theme: Theme) {
+  public installTheme(theme: Theme): void {
     this.themePickerService.installTheme(theme);
   }
 }
