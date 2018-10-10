@@ -1,17 +1,19 @@
-<div class="scanner-shell" [hidden]="!qrScannerData.hasDevices">
+<div class="scanner-shell" [hidden]="!scannerData.hasDevices">
 
-  <zxing-scanner #scanner start="true" [device]="qrScannerData.currentDevice" (scanSuccess)="handleQrCodeResult($event)" [formats]="['CODE_39', 'CODE_128', 'QR_CODE']"></zxing-scanner>
+  <zxing-scanner #scanner start="true" [device]="scannerData.currentDevice" (scanSuccess)="handleQrCodeResult($event)"
+    [formats]="['QR_CODE']">
+  </zxing-scanner>
 
   <footer>
     <span>Result:</span>
     <span>
-      <em *ngIf="!qrScannerData.qrResultString">wating for scan...</em>
-      <strong>{{ qrScannerData.qrResultString }}</strong>
+      <em *ngIf="!scannerData.qrResultString">Waiting for scan...</em>
+      <strong>{{ scannerData.qrResultString }}</strong>
     </span>
   </footer>
 
-  <button mat-icon-button (click)="openDialog()">
-    <mat-icon aria-label="scanner options">info</mat-icon>
+  <button id="scanner-option" mat-fab (click)="openDialog()">
+    <mat-icon aria-label="scanner options">photo_camera</mat-icon>
   </button>
 
 </div>

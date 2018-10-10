@@ -1,6 +1,6 @@
 import { Result } from '@zxing/library';
 
-export class QRScannerData {
+export class ScannerData {
   public hasPermission: boolean;
   public hasDevices: boolean;
   public qrResultString: string;
