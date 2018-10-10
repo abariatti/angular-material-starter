@@ -18,7 +18,7 @@ export class QrScannerComponent implements OnInit {
 
   @ViewChild('scanner')
   public scanner: ZXingScannerComponent;
-  private scannerData: ScannerData = new ScannerData();
+  public scannerData: ScannerData = new ScannerData();
 
   public ngOnInit(): void {
     this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => this.chooseDevice(devices));
