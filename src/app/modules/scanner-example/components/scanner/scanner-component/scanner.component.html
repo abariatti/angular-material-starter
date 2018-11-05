@@ -1,0 +1,15 @@
+<button id="scanner-option" mat-fab (click)="openDialog()" [matBadge]="ttl">
+  <mat-icon aria-label="scanner options" *ngIf="scannerData.currentDevice">videocam</mat-icon>
+  <mat-icon aria-label="scanner options" *ngIf="!scannerData.currentDevice">videocam_off</mat-icon>
+</button>
+
+<div class="scanner-container">
+
+  <zxing-scanner #scanner
+    [device]="scannerData.currentDevice"
+    (scanSuccess)="onScanSuccess($event)"
+    (hasDevices)="onHasDevices($event)"
+    (camerasFound)="onCamerasFound($event)"
+    (permissionResponse)="onPermissionResponse($event)"></zxing-scanner>
+
+</div>

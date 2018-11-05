@@ -3,5 +3,6 @@
         "injectable",
         "mat",
         "sidenav"
-    ]
+    ],
+    "tslint.autoFixOnSave": true
 }
