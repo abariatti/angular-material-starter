@@ -6,7 +6,4 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./side-menu-items.component.scss']
 })
 export class SideMenuItemsComponent {
-
-  constructor() { }
-
 }

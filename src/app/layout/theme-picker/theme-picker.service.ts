@@ -36,12 +36,12 @@ export class ThemePickerService {
     });
   }
 
-  public installTheme(theme: Theme) {
+  public installTheme(theme: Theme): void {
     this.themeSource.next(theme);
     this.themeStorage.storeTheme(theme);
   }
 
-  public register(element: ElementRef, overlayContainer: OverlayContainer) {
+  public register(element: ElementRef, overlayContainer: OverlayContainer): void {
     this.element = element;
     this.overlayContainer = overlayContainer;
 

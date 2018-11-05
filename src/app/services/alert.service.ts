@@ -23,13 +23,13 @@ export class AlertService {
         });
     }
 
-    success(message: string, keepAfterNavigationChange = false) {
+    public success(message: string, keepAfterNavigationChange = false): void {
         this.snackBar.open(message, 'Ok', {
           duration: 2000,
         });
     }
 
-    error(message: string, keepAfterNavigationChange = true) {
+    public error(message: string, keepAfterNavigationChange = true): void {
         this.snackBar.open(message, 'Ok');
     }
 }

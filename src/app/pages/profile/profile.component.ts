@@ -8,10 +8,10 @@ import { User } from '../../models/user';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  currentUser: any = {};
+  public currentUser: any = {};
   constructor(private authenticationService: AuthenticationService) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.authenticationService.me().subscribe(user => {
       this.currentUser = user;
     });

@@ -1,15 +1,15 @@
 export class Product {
-  id: number;
-  brandId: number;
-  camera: string;
-  cpu: string;
-  display: string;
-  gpu: string;
-  name: string;
-  os: string;
-  ram: string;
-  size: string;
-  storage: string;
-  weight: string;
-  year: number;
+  public id: number;
+  public brandId: number;
+  public camera: string;
+  public cpu: string;
+  public display: string;
+  public gpu: string;
+  public name: string;
+  public os: string;
+  public ram: string;
+  public size: string;
+  public storage: string;
+  public weight: string;
+  public year: number;
 }

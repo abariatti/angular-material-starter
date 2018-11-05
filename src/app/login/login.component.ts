@@ -6,18 +6,19 @@ import { AuthenticationService } from '../services/authentication.service';
 import { AlertService } from '../services/alert.service';
 import { NgForm, FormGroup, FormControlName } from '@angular/forms';
 
+export const returnUrl = 'returnUrl';
+
 @Component({
   selector: 'app-login',
   templateUrl: 'login.component.html',
   styleUrls: ['./login.component.scss']
 })
-
 export class LoginComponent implements OnInit {
-  loginModel: Login = new Login();
-  registerModel: Register = new Register();
-  loading = false;
-  returnUrl: string;
-  selectedIndex: Number = 0;
+  public loginModel: Login = new Login();
+  public registerModel: Register = new Register();
+  public loading = false;
+  public returnUrl: string;
+  public selectedIndex: Number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,14 +27,14 @@ export class LoginComponent implements OnInit {
     private alertService: AlertService,
   ) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     // reset login status
     this.authenticationService.logout();
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams[returnUrl] || '/';
   }
 
-  login() {
+  public login(): void {
     this.loading = true;
     this.authenticationService.login(this.loginModel.username, this.loginModel.password)
       .subscribe(
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit {
         });
   }
 
-  register(fregister: NgForm) {
+  public register(fregister: NgForm): void {
     this.loading = true;
     this.registerModel.username = this.registerModel.email;
     this.authenticationService.register(this.registerModel)
